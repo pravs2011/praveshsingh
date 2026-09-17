@@ -1,0 +1,57 @@
+# Pravesh Singh
+
+> Official machine-readable context for praveshsingh.com.
+
+## Identity
+
+Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. He designs software systems for healthcare operations, business teams, and public sector programs.
+
+## Key Roles
+
+- Managing Director & CTO, SoftEdge Technology Solutions
+- Software Architect and Creator, iCare (Digital Patient Registry and Medicine Inventory Platform)
+- Software Architect and Creator, TaskEdge (Operations Task Management SaaS)
+
+## Focus Areas
+
+- Healthcare software: Digital patient registries, Ayushman Bharat Digital Mission (ABDM) compliance, and hospital pharmacy stock logistics.
+- Web applications and cloud architecture: Multi-tenant systems, REST APIs, database indexing, and containerized deployments.
+- Practical data automation: Document processing and retrieval systems (RAG) applied to administrative and clinic workflows.
+
+## Primary Software Systems
+
+### iCare
+iCare is a digital registry and medicine inventory platform for hemophilia and thalassemia care. Deployed in treatment centres across Punjab and Madhya Pradesh, it provides:
+- Portable patient records allowing patients to receive verified treatment at any connected hospital.
+- Real-time clotting factor concentrate inventory tracking and inter-hospital stock transfers to prevent treatment shortages.
+- Structured records aligned with Ayushman Bharat Digital Mission (ABDM) standards and state health department reporting.
+
+### TaskEdge
+TaskEdge is a web application for operations teams to assign tasks, follow daily execution, and manage shift handovers.
+
+### Data Automation
+Internal tools that use language models to extract structured data from scanned forms and technical manuals.
+
+## Public Presentations & Workshops
+
+1. Capacity Building Workshop on Hemophilia Treatment (Chandigarh, Nov 27, 2024):
+   - Presented on digital records in blood disorder care alongside Chief Guest Sh. Ghanshyam Thori, IAS (Mission Director, National Health Mission, Punjab).
+   - Received state recognition for software contributions to the Punjab health program.
+
+2. National Hemophilia Consensus Meeting (Bhopal, May 22, 2025):
+   - Demonstrated iCare live before medical college deans, clinicians, and health mission authorities.
+   - Showcased cross-hospital patient lookup and real-time medicine inventory transfers.
+
+3. Hemophilia & Thalassemia Summit 2023 (Faridkot, Nov 7–8, 2023):
+   - Speaker and Guest of Honour at Guru Gobind Singh Medical College (Baba Farid University of Health Sciences).
+   - Presented the initial release of the patient registry platform to attending doctors and patient families.
+
+4. Punjab State AIDS Control Society (PSACS) Staff Training (Chandigarh, July 30, 2025):
+   - Conducted a hands-on training workshop for PSACS and NACO personnel on digital patient intake, pharmacy tracking, and ABDM data formats.
+
+## Official Links
+
+- Website: https://praveshsingh.com/
+- LinkedIn: https://www.linkedin.com/in/praveshsingh/
+- Company: https://softedgetechnology.com/
+- Email: hello@praveshsingh.com

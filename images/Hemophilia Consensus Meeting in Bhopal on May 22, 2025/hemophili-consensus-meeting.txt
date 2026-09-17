@@ -1,0 +1,16 @@
+Thrilled to represent iCare at the Hemophilia Consensus Meeting in Bhopal on May 22, 2025, where I had the opportunity to present a live demo of our Hemophilia Management Application — a solution I’ve been passionately building to address real-world healthcare challenges.
+
+🔍 What we showcased:
+ 🔹 Patient registration at one Treatment Centre (TC) and seamless medication access at another
+ 🔹 Real-time drug inventory tracking and inter-centre transfers
+ 🔹 Intelligent workflows for patient and drug movement across the network
+
+This isn’t a prototype — it’s an operational system, already deployed and improving care coordination across multiple states in India.
+
+🧩 Behind the scenes, I’ve been deeply involved in:
+Architecting workflows that mirror clinical realities
+Driving interoperability for patient safety
+Building scalable systems with real impact on the ground
+
+As digital health continues to evolve, I’m always looking to connect with innovators, product leaders, and health informatics experts who are just as committed to transforming patient care through technology.
+Let’s collaborate, exchange ideas, and build the next generation of health systems together. 
