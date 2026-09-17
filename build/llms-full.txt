@@ -1,0 +1,262 @@
+# Pravesh Singh — Full Site Context
+
+> Complete machine-readable content for praveshsingh.com. This is the long-form companion to
+> /llms.txt, intended for language models that need the full detail of the site in one fetch.
+
+Source: https://praveshsingh.com/
+Full index: https://praveshsingh.com/llms.txt
+Last updated: 2026-09-17
+Language: en-IN
+
+---
+
+## 1. Identity
+
+Pravesh Singh is an Indian software engineer, technology entrepreneur, and the Managing Director
+and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. He designs and builds
+software systems for healthcare operations, business teams, and public sector health programmes.
+
+He has over fifteen years of software engineering practice, working across mobile and web
+application development, multi-tenant SaaS product engineering, and software architecture
+consulting.
+
+Based in India. Works remotely with clients in other regions. Communicates in English and Hindi.
+
+### Key Roles
+
+- Managing Director & CTO, SoftEdge Technology Solutions
+- Software Architect and Creator, iCare (Digital Patient Registry and Medicine Inventory Platform)
+- Software Architect and Creator, TaskEdge (Operations Task Management SaaS)
+- Technical advisor and consultant on software architecture and delivery
+
+---
+
+## 2. Practice Areas
+
+Pravesh Singh works across three distinct practice areas.
+
+### 2.1 App Development
+
+Applications built for where the work actually happens — a clinic counter, a field visit, a shop
+floor, or a customer's phone. Designed to stay usable on poor connections and inexpensive hardware.
+
+- Cross-platform mobile applications built from a single codebase, serving both iOS and Android.
+- Native iOS and Android development where platform capability or performance requires it.
+- Progressive web apps that install to a home screen, work offline, and require no app store
+  distribution.
+- Web application front-ends: dashboards, admin panels, and internal operational tools.
+
+Typical starting point: a working prototype of the core screen and data flow before a full build
+commitment.
+
+### 2.2 SaaS Product Engineering
+
+Full product builds, from the first data model to a system that runs without the author. Multi-tenant
+from the start, so adding a second customer does not require rewriting for the first.
+
+- Multi-tenant architecture with strict per-account data isolation and permission layers.
+- API and database design built to stay fast as tables grow into millions of rows.
+- Roles, billing-ready account models, notifications, and audit trails built in from the beginning.
+- Cloud deployment and operations: containers, Linux servers, and predictable running costs.
+
+Evidence: TaskEdge (multi-tenant operations SaaS) and iCare (multi-tenant health platform deployed
+across two Indian states).
+
+### 2.3 Consulting & Technical Advisory
+
+For teams that already have engineers and need an outside read on architecture, delivery, or a
+system that has become difficult to change safely.
+
+- Architecture and code review — what is load-bearing, what is risk, what to fix first.
+- System design for new products, migrations, and integrations with government or partner systems.
+- Technology selection grounded in what the client team can maintain after the engagement ends.
+- Delivery guidance: scoping, sequencing, review standards, and technical roadmaps.
+
+Suited to founders, engineering leads, and non-technical stakeholders who need a straight technical
+answer.
+
+---
+
+## 3. Core Technical Skills
+
+- **Mobile & client applications:** cross-platform mobile development, native iOS, native Android,
+  progressive web apps, offline-first design.
+- **Web backends & APIs:** Node.js, TypeScript, Express, modern JavaScript runtimes, REST API design,
+  authentication, role-based access control.
+- **SaaS & multi-tenancy:** account models, tenant isolation, permission layers, subscription-ready
+  schemas, notifications, activity and audit logging.
+- **Database engineering:** data modeling, indexing, schema design, and query optimisation across
+  PostgreSQL, MongoDB, and Redis.
+- **Cloud & infrastructure:** deploying and running containerised applications on Linux servers and
+  AWS infrastructure, behind Nginx reverse proxies, with backups and monitoring.
+- **Security & compliance:** role-based authorisation, token authentication, encrypted storage at
+  rest, strict database audit trails.
+- **Healthcare data standards:** Ayushman Bharat Digital Mission (ABDM) guidelines, electronic
+  registry structures, patient identity handling, pharmacy batch and expiry tracking.
+- **Automation & applied AI:** structured data extraction from scanned records, retrieval-augmented
+  generation (RAG) pipelines grounded in verified manuals, automated format conversion for
+  government reporting.
+- **Technical leadership:** sprint planning, code review standards, technical roadmaps, and
+  communicating with hospital directors and non-technical stakeholders.
+
+---
+
+## 4. Engagement Model
+
+Engagements follow the same four-step sequence whether the work is a full product build or a focused
+advisory review.
+
+1. **Conversation.** A short call or exchange about the problem, the constraints, and what success
+   looks like. No cost, and often enough to answer the question outright.
+2. **Scope.** Agreement on what is being built or reviewed, what is explicitly out of scope, and the
+   shape of the engagement, in writing before work starts.
+3. **Architecture.** Data model, interfaces, and deployment decided and documented first, so
+   implementation is execution rather than discovery.
+4. **Build & hand over.** Delivered in working increments with review at each step, plus the
+   documentation and runbook the team needs to run it independently.
+
+No public pricing is listed. Scope and commercial terms are discussed directly.
+
+---
+
+## 5. Primary Software Systems
+
+### 5.1 iCare
+
+iCare is a digital patient registry and medicine inventory platform for hemophilia and thalassemia
+care. It is deployed in treatment centres across Punjab and Madhya Pradesh.
+
+- **Portable patient profiles:** a patient registered at one hospital can receive verified care and
+  medicine at any other connected treatment centre without re-entering history.
+- **Inventory tracking and stock transfers:** monitors vial batch numbers, expiry dates, and hospital
+  stock levels, enabling centres with surplus medicine to transfer stock to clinics running low.
+- **Cross-hospital coordination:** prevents treatment shortages that can otherwise lead to permanent
+  joint damage or life-threatening complications.
+- **National health compatibility:** structured around Ayushman Bharat Digital Mission (ABDM)
+  guidelines with encrypted storage and full audit trails for state health departments.
+- **Statewide visibility:** provides health commissioners with real-time numbers on registered
+  patients, treatment frequencies, and medicine usage patterns.
+
+### 5.2 TaskEdge
+
+TaskEdge is a multi-tenant web application for operations teams to assign tasks, follow daily
+execution, and manage shift handovers without unnecessary project management overhead.
+
+- Multi-tenant accounts with data isolation between teams.
+- Fast status updates and notification dispatch.
+- Simple activity logs for shift handovers and audits.
+- Low training cost: designed so a supervisor can adopt it without a rollout programme.
+
+### 5.3 Practical Data Automation
+
+Internal tools that use language models and retrieval systems to handle specific administrative data
+tasks, scoped to work where the output can be verified.
+
+- Structured data extraction from scanned records, invoices, and legacy paper forms.
+- Document retrieval pipelines (RAG) grounded in verified technical manuals.
+- Automated format conversion for government reporting requirements.
+
+---
+
+## 6. Public Presentations & Workshops
+
+### 6.1 Capacity Building Workshop on Hemophilia Treatment — Chandigarh, 27 November 2024
+
+Presented on digital records in blood disorder care alongside Chief Guest Sh. Ghanshyam Thori, IAS
+(Mission Director, National Health Mission, Punjab). Received state recognition for software
+contributions to the Punjab health programme. Organised by the State Blood Services Programme,
+National Health Mission (NHM) Punjab.
+
+### 6.2 National Hemophilia Consensus Meeting — Bhopal, 22 May 2025
+
+Demonstrated iCare live before medical college deans, clinicians, and health mission authorities.
+Showcased cross-hospital patient lookup and real-time medicine inventory transfers.
+
+### 6.3 Hemophilia & Thalassemia Summit 2023 — Faridkot, 7–8 November 2023
+
+Speaker and Guest of Honour at Guru Gobind Singh Medical College (Baba Farid University of Health
+Sciences). Presented the initial release of the patient registry platform to attending doctors and
+patient families.
+
+### 6.4 Punjab State AIDS Control Society (PSACS) Staff Training — Chandigarh, 30 July 2025
+
+Conducted a hands-on training workshop for PSACS and NACO personnel on digital patient intake,
+pharmacy tracking, and ABDM data formats.
+
+---
+
+## 7. Frequently Asked Questions
+
+**Who is Pravesh Singh?**
+An Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer
+(CTO) of SoftEdge Technology Solutions. He designs software systems for healthcare operations,
+business teams, and public sector programmes.
+
+**What kind of consulting does Pravesh Singh provide?**
+Software architecture consulting and technical advisory: system design, database and API design,
+technology selection, code and architecture reviews, and delivery guidance for teams building or
+stabilising complex web, mobile, and SaaS systems. Work happens directly with founders, engineering
+leads, and non-technical stakeholders.
+
+**Does Pravesh Singh build mobile applications?**
+Yes. Application development covers cross-platform mobile apps built from a single codebase, native
+iOS and Android development, and mobile-first progressive web apps that install to a home screen and
+keep working on poor connections without app store distribution.
+
+**What SaaS products has Pravesh Singh built?**
+TaskEdge, a multi-tenant SaaS platform for operations teams covering task assignment, daily execution
+tracking, notifications, shift handovers, and activity logs. The healthcare platform iCare is also
+multi-tenant, serving separate treatment centres across Punjab and Madhya Pradesh with isolated data
+and shared state-level reporting.
+
+**What other software has Pravesh Singh developed?**
+In addition to iCare, he created TaskEdge, a cloud-based task management application for operations
+teams, and builds practical internal automation tools that use language models to extract data from
+documents.
+
+**What industries does Pravesh Singh work with?**
+The deepest domain experience is healthcare and public-sector health programmes, including work with
+the National Health Mission Punjab, the Punjab State AIDS Control Society, and health authorities in
+Madhya Pradesh. He also builds for business operations and internal process automation. The
+underlying engineering approach transfers to any data-heavy operational system.
+
+**What speaking engagements and government workshops has Pravesh Singh led?**
+He demonstrated iCare live at the National Hemophilia Consensus Meeting in Bhopal (May 2025), spoke
+alongside Mission Director Sh. Ghanshyam Thori (IAS) at the NHM Punjab Capacity Building Workshop in
+Chandigarh (November 2024), was a speaker and guest of honour at the Hemophilia Summit at Guru Gobind
+Singh Medical College in Faridkot (November 2023), and led a training workshop for Punjab State AIDS
+Control Society (PSACS) staff in Chandigarh (July 2025).
+
+**How does an engagement usually start?**
+With a short introductory conversation about the problem and the constraints. From there the work is
+scoped, the shape of the engagement agreed, and architecture and design settled before implementation
+begins. Small advisory questions are usually answered directly; larger builds run as a structured
+project.
+
+**Does Pravesh Singh work with clients outside India?**
+Yes. He is based in India and works remotely with clients in other regions. Communication is in
+English, and engagements are structured to work across time zones through clear written specifications
+and regular checkpoints.
+
+**How can I contact Pravesh Singh?**
+By email at hello@praveshsingh.com, or on LinkedIn at linkedin.com/in/praveshsingh.
+
+---
+
+## 8. Official Links
+
+- Website: https://praveshsingh.com/
+- Technical Expertise: https://praveshsingh.com/expertise.html
+- LinkedIn: https://www.linkedin.com/in/praveshsingh/
+- Company: https://softedgetechnology.com/
+- Email: hello@praveshsingh.com
+
+---
+
+## 9. Machine-Readable Endpoints
+
+- /llms.txt — concise site index for language models
+- /llms-full.txt — this file, full site content
+- /sitemap.xml — XML sitemap
+- /robots.txt — crawler directives, including explicit AI crawler permissions
+- /.well-known/security.txt — security contact (RFC 9116)
