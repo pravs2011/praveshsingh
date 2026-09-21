@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-M335RXDF');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ABDM Integration: A Pragmatic Engineering Guide for HealthTech Developers – Pravesh Singh</title>
+  <meta name="description" content="A practical developer guide to integrating with the Ayushman Bharat Digital Mission (ABDM): ABHA verification, async webhook architecture, FHIR R4 JSON bundles, and ECDH encryption.">
+  <meta name="author" content="Pravesh Singh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="keywords" content="ABDM integration guide, Ayushman Bharat Digital Mission, ABHA verification API, FHIR R4 India, HIP HIU gateway, Healthtech developer guide, Pravesh Singh">
+  <meta name="theme-color" content="#090b10">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://praveshsingh.com/writing/abdm-integration-developer-guide.html">
+
+  <link rel="describedby" type="text/plain" href="https://praveshsingh.com/llms.txt" title="Site index for language models">
+  <link rel="security-policy" href="https://praveshsingh.com/.well-known/security.txt">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ABDM Integration: A Pragmatic Engineering Guide for HealthTech Developers">
+  <meta property="og:description" content="A developer-first breakdown of Ayushman Bharat Digital Mission architecture: ABHA verification, HIP/HIU gateway patterns, and FHIR JSON bundles.">
+  <meta property="og:url" content="https://praveshsingh.com/writing/abdm-integration-developer-guide.html">
+  <meta property="og:site_name" content="Pravesh Singh">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://praveshsingh.com/images/pravesh-singh.png">
+  <meta property="article:published_time" content="2026-08-20">
+  <meta property="article:author" content="Pravesh Singh">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ABDM Integration: A Pragmatic Engineering Guide for HealthTech Developers">
+  <meta name="twitter:description" content="A developer guide to ABDM: ABHA verification, FHIR R4 bundles, and async gateway webhooks.">
+  <meta name="twitter:image" content="https://praveshsingh.com/images/pravesh-singh.png">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23090b10'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif' font-size='50' font-weight='700' fill='%236366f1'%3EPS%3C/text%3E%3C/svg%3E">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://praveshsingh.com/writing/abdm-integration-developer-guide.html#article",
+        "headline": "ABDM Integration: A Pragmatic Engineering Guide for HealthTech Developers",
+        "description": "A developer-first breakdown of Ayushman Bharat Digital Mission architecture: ABHA verification, HIP/HIU gateway patterns, FHIR JSON diagnostic bundles, and cryptographic consent artifacts.",
+        "inLanguage": "en-IN",
+        "datePublished": "2026-08-20",
+        "dateModified": "2026-09-21",
+        "author": {
+          "@type": "Person",
+          "name": "Pravesh Singh",
+          "jobTitle": "Founder & CTO",
+          "url": "https://praveshsingh.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "SoftEdge Technology Solutions",
+          "url": "https://softedgetechnology.com/"
+        },
+        "mainEntityOfPage": "https://praveshsingh.com/writing/abdm-integration-developer-guide.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://praveshsingh.com/writing/abdm-integration-developer-guide.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://praveshsingh.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Writing",
+            "item": "https://praveshsingh.com/writing/index.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "ABDM Integration Guide",
+            "item": "https://praveshsingh.com/writing/abdm-integration-developer-guide.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #090b10;
+      --bg-surface: #10141d;
+      --bg-surface-elevated: #151a26;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --text: #f0f3f8;
+      --text-muted: #9aa3b5;
+      --text-sub: #6f788b;
+      --primary: #6366f1;
+      --teal: #0ea5e9;
+      --green: #10b981;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --transition: 0.2s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: min(1080px, 92%); margin: 0 auto; }
+    article { max-width: 820px; margin: 0 auto; }
+    a { color: inherit; text-decoration: none; transition: var(--transition); }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 11, 16, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .brand-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      display: block;
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-name { font-size: 1.02rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em; }
+    .brand-role { font-size: 0.74rem; color: var(--text-muted); font-weight: 500; }
+
+    /* Desktop Navigation Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    .nav-link .chevron {
+      width: 13px;
+      height: 13px;
+      transition: transform 0.2s ease;
+      opacity: 0.7;
+    }
+    .nav-item:hover .chevron {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
+    /* Hover Bridge Dropdown */
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: rgba(13, 17, 24, 0.97);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      padding: 10px;
+      min-width: 290px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 1001;
+    }
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: transparent;
+    }
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown {
+      display: flex;
+      animation: navDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes navDropdownFade {
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .dropdown-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 9px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .dropdown-link:hover {
+      background: rgba(99, 102, 241, 0.12);
+      color: #ffffff;
+    }
+    .dropdown-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .dropdown-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+    .dropdown-desc {
+      font-size: 0.76rem;
+      color: var(--text-sub);
+      line-height: 1.35;
+    }
+
+    /* Nav Actions */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-linkedin-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9aa3b5;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .nav-linkedin-btn:hover {
+      background: rgba(10, 102, 194, 0.2);
+      border-color: rgba(10, 102, 194, 0.5);
+      color: #0077b5;
+      transform: translateY(-1px);
+    }
+    .btn-nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 9px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.25);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-nav-cta:hover {
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* Animated Hamburger Button */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      padding: 0;
+      z-index: 1002;
+      transition: background 0.2s ease;
+    }
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+    .hamburger span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .hamburger span:nth-child(1) { margin-bottom: 4px; }
+    .hamburger span:nth-child(3) { margin-top: 4px; }
+    .hamburger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* Full-Screen Frosted Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(9, 11, 16, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 24px 20px 40px;
+      overflow-y: auto;
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+      border-top: 1px solid var(--border);
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .mobile-drawer.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-drawer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .mobile-drawer-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-sub);
+      padding: 0 10px 4px;
+    }
+    .mobile-drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .mobile-drawer-link:hover,
+    .mobile-drawer-link.active {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.3);
+      color: #ffffff;
+    }
+    .mobile-drawer-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+    .mobile-drawer-actions {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-linkedin-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(10, 102, 194, 0.12);
+      border: 1px solid rgba(10, 102, 194, 0.3);
+      color: #70b5f9;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .article-header { padding: 64px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+    .crumb { font-size: 0.82rem; color: var(--text-sub); margin-bottom: 20px; }
+    .crumb a { color: var(--text-muted); }
+    .crumb a:hover { color: #ffffff; }
+
+    .tag-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    .article-title {
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    .author-info { display: flex; align-items: center; gap: 10px; }
+    .author-avatar { width: 28px; height: 28px; border-radius: 50%; }
+
+    .article-content { font-size: 1.05rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 64px; }
+    .article-content h2 { font-size: 1.75rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin: 48px 0 18px; line-height: 1.3; }
+    .article-content h3 { font-size: 1.3rem; font-weight: 700; color: #f1f5f9; margin: 32px 0 14px; }
+    .article-content p { margin-bottom: 24px; }
+    .article-content ul, .article-content ol { margin: 0 0 24px 24px; display: flex; flex-direction: column; gap: 10px; }
+    .article-content li { color: #cbd5e1; }
+    .article-content strong { color: #ffffff; }
+
+    .callout {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 20px 24px;
+      margin: 32px 0;
+      font-size: 0.98rem;
+    }
+    .callout-title { font-weight: 700; color: #ffffff; margin-bottom: 6px; font-size: 1rem; }
+
+    pre {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 28px 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: #e6edf3;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #93c5fd;
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+
+    .author-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      margin: 64px 0;
+    }
+    .author-card-avatar { width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--border-hover); flex-shrink: 0; }
+
+    footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--text-muted); font-size: 0.86rem; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: #ffffff; }
+
+    @media (max-width: 1080px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 720px) {
+      .author-card { flex-direction: column; text-align: center; }
+      .article-title { font-size: 2.1rem; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+      .btn-nav-cta { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M335RXDF"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header>
+    <div class="container">
+      <nav aria-label="Main Navigation">
+        <a href="../index.html" class="brand" aria-label="Pravesh Singh homepage">
+          <picture>
+            <source srcset="../images/pravesh-singh.webp" type="image/webp">
+            <img class="brand-avatar" src="../images/pravesh-singh.png" alt="Pravesh Singh" width="40" height="40" loading="eager">
+          </picture>
+          <div class="brand-text">
+            <span class="brand-name">Pravesh Singh</span>
+            <span class="brand-role">Founder &amp; CTO</span>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <div class="nav-item">
+            <a href="../about.html" class="nav-link">About</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="../index.html#software" class="nav-link" aria-haspopup="true" aria-expanded="false">
+              <span>Systems</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+            <div class="nav-dropdown" role="menu">
+              <a href="../icare.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">🏥</div>
+                <div>
+                  <div class="dropdown-title">iCare Platform</div>
+                  <div class="dropdown-desc">Clinical registry &amp; cold-chain drug logistics</div>
+                </div>
+              </a>
+              <a href="../taskedge.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">⚡</div>
+                <div>
+                  <div class="dropdown-title">TaskEdge SaaS</div>
+                  <div class="dropdown-desc">Multi-tenant business &amp; operations OS</div>
+                </div>
+              </a>
+              <a href="../automation.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">🤖</div>
+                <div>
+                  <div class="dropdown-title">AI &amp; Automation</div>
+                  <div class="dropdown-desc">Deterministic extraction &amp; document ETL</div>
+                </div>
+              </a>
+              <a href="../industries.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">🌐</div>
+                <div>
+                  <div class="dropdown-title">Industries &amp; Sectors</div>
+                  <div class="dropdown-desc">Healthcare, Deskless Ops, FinTech &amp; DPI</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="nav-item">
+            <a href="../expertise.html" class="nav-link">Expertise</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="index.html" class="nav-link active">Writing</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="../index.html#events" class="nav-link">Talks</a>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener noreferrer" class="nav-linkedin-btn" aria-label="Connect with Pravesh Singh on LinkedIn" title="LinkedIn Profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+
+          <a href="../expertise.html#inquiry" class="btn-nav-cta">Start a Project</a>
+
+          <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-drawer-section">
+        <div class="mobile-drawer-label">Platform Overview</div>
+        <a href="../about.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">👤</span>
+          <span>About Pravesh</span>
+        </a>
+        <a href="../expertise.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">💼</span>
+          <span>Technical Expertise &amp; Advisory</span>
+        </a>
+        <a href="index.html" class="mobile-drawer-link active" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">📝</span>
+          <span>Engineering Essays &amp; Writing</span>
+        </a>
+        <a href="../index.html#events" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🎤</span>
+          <span>Keynotes &amp; Workshops</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-section">
+        <div class="mobile-drawer-label">Flagship Systems</div>
+        <a href="../icare.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🏥</span>
+          <span>iCare Healthcare Platform</span>
+        </a>
+        <a href="../taskedge.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">⚡</span>
+          <span>TaskEdge Operations SaaS</span>
+        </a>
+        <a href="../automation.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🤖</span>
+          <span>AI &amp; Document Automation</span>
+        </a>
+        <a href="../industries.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🌐</span>
+          <span>Industry Footprint</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-actions">
+        <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener noreferrer" class="mobile-linkedin-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <span>Connect on LinkedIn</span>
+        </a>
+        <a href="../expertise.html#inquiry" class="btn-nav-cta" style="justify-content:center; padding:12px;" onclick="closeMobileMenu()">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article>
+        <header class="article-header">
+          <div class="crumb">
+            <a href="../index.html">Home</a> &nbsp;/&nbsp; <a href="index.html">Writing</a> &nbsp;/&nbsp; <span>Healthcare &amp; Standards</span>
+          </div>
+          <span class="tag-badge">Healthcare &amp; Standards</span>
+          <h1 class="article-title">ABDM Integration: A Pragmatic Engineering Guide for HealthTech Developers</h1>
+          <div class="article-meta">
+            <div class="author-info">
+              <img class="author-avatar" src="../images/pravesh-singh.png" alt="Pravesh Singh">
+              <span>Pravesh Singh</span>
+            </div>
+            <span>•</span>
+            <span>August 20, 2026</span>
+            <span>•</span>
+            <span>11 min read</span>
+          </div>
+        </header>
+
+        <div class="article-content">
+          <p>
+            The Ayushman Bharat Digital Mission (ABDM), stewarded by India's National Health Authority (NHA), is creating an open national digital health network similar to what UPI accomplished for digital payments.
+          </p>
+
+          <p>
+            However, for software engineers and engineering leads, the ABDM developer documentation can initially feel overwhelming: hundreds of API endpoints, asynchronous webhook patterns, cryptographic consent artifacts, and FHIR R4 schema specifications.
+          </p>
+
+          <p>
+            In this guide, we break down the ABDM architecture into actionable engineering concepts, highlighting the critical integration milestones, callback patterns, and cryptographic plumbing required to achieve production compliance.
+          </p>
+
+          <h2>1. The Mental Model: Gateway, HIP, HIU, and Registries</h2>
+
+          <p>
+            To architect an ABDM-compliant system, you must understand the four primary entities in the network:
+          </p>
+
+          <ul>
+            <li><strong>ABDM Gateway (NHA):</strong> The central routing bus. It does not store medical records; it acts as a router for identity verification, consent negotiation, and metadata discovery.</li>
+            <li><strong>Health Information Provider (HIP):</strong> Any hospital, diagnostic lab, or clinic system that generates and holds patient clinical data (e.g., electronic medical records, lab reports).</li>
+            <li><strong>Health Information User (HIU):</strong> Any authorized entity (teleconsultation app, specialist doctor portal) requesting access to historical health records with patient consent.</li>
+            <li><strong>Registries:</strong> Authoritative databases including ABHA (Ayushman Bharat Health Account), HFR (Health Facility Registry), and HPR (Healthcare Professionals Registry).</li>
+          </ul>
+
+          <div class="callout">
+            <div class="callout-title">Core Architectural Principle</div>
+            <p><strong>Zero Centralized PHI:</strong> The ABDM Gateway never sees unencrypted patient health data. Clinical records travel point-to-point between HIP and HIU using Elliptic-Curve Diffie-Hellman (ECDH) key exchange and AES-GCM encryption.</p>
+          </div>
+
+          <h2>2. The Asynchronous Callback Pattern: `/v0.5/` Endpoints</h2>
+
+          <p>
+            Unlike traditional synchronous REST APIs where a `POST /create` immediately returns the generated record, the ABDM Gateway operates almost entirely on <strong>asynchronous request-response pairs</strong>.
+          </p>
+
+          <p>
+            When your system calls the gateway, it receives an immediate `HTTP 202 Accepted` response. The actual result is delivered seconds later as an HTTP POST callback to your configured webhook endpoint:
+          </p>
+
+          <pre><code>// 1. You make the request to Gateway:
+POST https://dev.abdm.gov.in/v0.5/users/auth/init
+Headers: { "X-CM-ID": "sbx", "Authorization": "Bearer &lt;GATEWAY_JWT&gt;" }
+Body: {
+  "requestId": "a9b8c7d6-...",
+  "timestamp": "2026-08-20T10:00:00.000Z",
+  "query": { "id": "919876543210@abdm", "purpose": "KYC_AND_LINK", "authMode": "MOBILE_OTP" }
+}
+
+// 2. Gateway returns immediate HTTP 202 Accepted.
+
+// 3. Gateway hits YOUR webhook seconds later:
+POST https://api.yourfacility.com/v0.5/users/auth/on-init
+Body: {
+  "requestId": "f1e2d3c4-...",
+  "timestamp": "2026-08-20T10:00:02.100Z",
+  "auth": { "transactionId": "tx-994821", "mode": "MOBILE_OTP" },
+  "resp": { "requestId": "a9b8c7d6-..." }  // Matches your initial requestId
+}</code></pre>
+
+          <p>
+            To manage this robustly in production, your backend must maintain an internal state machine (e.g., in Redis or PostgreSQL) that matches incoming <code>resp.requestId</code> callbacks with your originating client transaction.
+          </p>
+
+          <h2>3. The Three Integration Milestones (M1, M2, M3)</h2>
+
+          <h3>Milestone 1 (M1): ABHA Creation &amp; Verification</h3>
+          <p>
+            Enables creating new 14-digit ABHA IDs and ABHA Addresses (e.g., <code>user@abdm</code>) via Aadhaar OTP or mobile OTP, followed by demographic validation.
+          </p>
+
+          <h3>Milestone 2 (M2): Health Record Linking (HIP Role)</h3>
+          <p>
+            Allows your hospital/lab management software to link care contexts (e.g., Visit ID, Prescription ID) to the patient's ABHA account and respond to OTP-based linking requests.
+          </p>
+
+          <h3>Milestone 3 (M3): Consent-Driven Health Data Exchange (HIU &amp; HIP)</h3>
+          <p>
+            The full lifecycle: initiating consent requests, receiving cryptographic consent artifacts approved by the patient via the ABHA mobile app, packaging clinical data into FHIR R4 bundles, encrypting with ECDH, and transferring over the data bridge.
+          </p>
+
+          <h2>4. Structuring FHIR R4 Bundles</h2>
+
+          <p>
+            All medical records shared under ABDM must be encoded as standardized HL7 FHIR (Fast Healthcare Interoperability Resources) Release 4 JSON bundles. A typical <code>DiagnosticReport</code> bundle looks like this:
+          </p>
+
+          <pre><code>{
+  "resourceType": "Bundle",
+  "id": "bundle-cbc-report-01",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-08-20T11:00:00Z",
+    "profile": ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportRecord"]
+  },
+  "type": "document",
+  "entry": [
+    {
+      "fullUrl": "Composition/comp-01",
+      "resource": {
+        "resourceType": "Composition",
+        "status": "final",
+        "type": { "coding": [{ "system": "http://snomed.info/sct", "code": "721981007", "display": "Diagnostic studies report" }] },
+        "subject": { "reference": "Patient/pat-01", "display": "Rohan Kumar" },
+        "date": "2026-08-20T11:00:00Z",
+        "title": "Complete Blood Count Report"
+      }
+    },
+    {
+      "fullUrl": "Patient/pat-01",
+      "resource": {
+        "resourceType": "Patient",
+        "identifier": [{ "system": "https://healthid.abdm.gov.in", "value": "91-8842-1920-4491" }],
+        "name": [{ "text": "Rohan Kumar" }],
+        "gender": "male"
+      }
+    }
+  ]
+}</code></pre>
+
+          <h2>5. Engineering Best Practices for ABDM Production</h2>
+
+          <ul>
+            <li><strong>Idempotency Enforcement:</strong> Gateway webhooks can occasionally retry due to network timeouts. Always store processed <code>requestId</code> values in Redis with a 24-hour TTL to prevent double-processing.</li>
+            <li><strong>Asynchronous Worker Queues:</strong> Never process FHIR generation or ECDH encryption inside the synchronous HTTP request handler. Enqueue incoming webhooks into BullMQ or Celery worker pools.</li>
+            <li><strong>Zero Direct PII in Logs:</strong> Mask Aadhaar numbers and ABHA IDs in application logs to maintain compliance with the Digital Personal Data Protection Act.</li>
+          </ul>
+        </div>
+
+        <div class="author-card">
+          <img class="author-card-avatar" src="../images/pravesh-singh.png" alt="Pravesh Singh">
+          <div>
+            <h3 style="font-size:1.15rem; font-weight:700; color:#ffffff; margin-bottom:6px;">Written by Pravesh Singh</h3>
+            <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.6; margin-bottom:12px;">
+              Founder, Managing Director &amp; CTO at SoftEdge Technology Solutions. Architect of mission-critical healthcare networks and multi-tenant SaaS platforms. Advises founders and executive engineering teams on high-consequence system architecture.
+            </p>
+            <div style="display:flex; gap:16px; font-size:0.88rem; font-weight:600;">
+              <a href="../expertise.html" style="color:#818cf8;">View Engagement Packages &rarr;</a>
+              <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener" style="color:var(--teal);">Connect on LinkedIn &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>
+          <div style="font-weight:600; color:#ffffff;">Pravesh Singh</div>
+          <div style="font-size:0.8rem; color:var(--text-sub); margin-top:2px;">
+            Managing Director &amp; CTO, SoftEdge Technology Solutions · praveshsingh.com
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href="../about.html">About</a>
+          <a href="../icare.html">iCare</a>
+          <a href="../taskedge.html">TaskEdge</a>
+          <a href="../automation.html">AI Solutions</a>
+          <a href="../industries.html">Industries</a>
+          <a href="../expertise.html">Expertise</a>
+          <a href="index.html">Writing</a>
+          <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../llms.txt" target="_blank" rel="noopener">llms.txt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMobileMenu() {
+      const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+      hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('active');
+      mobileMenu.setAttribute('aria-hidden', isExpanded);
+      document.body.style.overflow = !isExpanded ? 'hidden' : '';
+    }
+
+    function closeMobileMenu() {
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('active');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+</body>
+</html>

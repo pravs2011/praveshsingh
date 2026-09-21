@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Structured Data Extraction with LLMs: Pushing Beyond Prompt Engineering – Pravesh Singh</title>
+  <meta name="description" content="Why naive prompt engineering fails on unstructured enterprise documents, and how to build deterministic schema-constrained LLM validation pipelines.">
+  <meta name="author" content="Pravesh Singh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="keywords" content="Structured data extraction LLM, JSON Schema constrained generation, Pydantic Instructor pipeline, OCR invoice extraction, AI document processing, Pravesh Singh">
+  <meta name="theme-color" content="#090b10">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html">
+
+  <link rel="describedby" type="text/plain" href="https://praveshsingh.com/llms.txt" title="Site index for language models">
+  <link rel="security-policy" href="https://praveshsingh.com/.well-known/security.txt">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Structured Data Extraction with LLMs: Pushing Beyond Prompt Engineering">
+  <meta property="og:description" content="Moving beyond naive prompt tricks: Designing production-grade, schema-validated document extraction engines.">
+  <meta property="og:url" content="https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html">
+  <meta property="og:site_name" content="Pravesh Singh">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://praveshsingh.com/images/pravesh-singh.png">
+  <meta property="article:published_time" content="2026-05-18">
+  <meta property="article:author" content="Pravesh Singh">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Structured Data Extraction with LLMs: Pushing Beyond Prompt Engineering">
+  <meta name="twitter:description" content="Architecting deterministic LLM document extraction with JSON Schemas, mathematical invariants, and targeted retry loops.">
+  <meta name="twitter:image" content="https://praveshsingh.com/images/pravesh-singh.png">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23090b10'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif' font-size='50' font-weight='700' fill='%236366f1'%3EPS%3C/text%3E%3C/svg%3E">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html#article",
+        "headline": "Structured Data Extraction with LLMs: Pushing Beyond Prompt Engineering",
+        "description": "Why naive prompt engineering fails on unstructured enterprise documents, and how to build deterministic schema-constrained LLM validation pipelines.",
+        "inLanguage": "en-IN",
+        "datePublished": "2026-05-18",
+        "dateModified": "2026-09-21",
+        "author": {
+          "@type": "Person",
+          "name": "Pravesh Singh",
+          "jobTitle": "Founder & CTO",
+          "url": "https://praveshsingh.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "SoftEdge Technology Solutions",
+          "url": "https://softedgetechnology.com/"
+        },
+        "mainEntityOfPage": "https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://praveshsingh.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Writing",
+            "item": "https://praveshsingh.com/writing/index.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "LLM Structured Extraction",
+            "item": "https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #090b10;
+      --bg-surface: #10141d;
+      --bg-surface-elevated: #151a26;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --text: #f0f3f8;
+      --text-muted: #9aa3b5;
+      --text-sub: #6f788b;
+      --primary: #6366f1;
+      --teal: #0ea5e9;
+      --green: #10b981;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --transition: 0.2s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: min(840px, 92%); margin: 0 auto; }
+    header .container { width: min(1080px, 92%); margin: 0 auto; }
+    a { color: inherit; text-decoration: none; transition: var(--transition); }
+
+    /* --- Navigation Bar --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 11, 16, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .brand-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid rgba(99, 102, 241, 0.4);
+      background: #151a26;
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-name { font-size: 0.98rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em; }
+    .brand-role { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: color 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover,
+    .nav-link.active,
+    .nav-item:hover > .nav-link {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .chevron {
+      width: 13px;
+      height: 13px;
+      opacity: 0.6;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-item:hover .chevron {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
+    /* Dropdown Menu with Hover-Bridge */
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 280px;
+      background: rgba(13, 17, 24, 0.97);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 1010;
+    }
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: transparent;
+    }
+    .nav-item:hover .nav-dropdown,
+    .nav-dropdown:hover {
+      display: flex;
+    }
+    .dropdown-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      transition: background 0.15s ease, color 0.15s ease;
+      text-decoration: none;
+    }
+    .dropdown-link:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
+    .dropdown-icon {
+      font-size: 1.15rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .dropdown-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 2px;
+    }
+    .dropdown-link:hover .dropdown-title {
+      color: #ffffff;
+    }
+    .dropdown-desc {
+      font-size: 0.74rem;
+      color: var(--text-sub);
+      line-height: 1.35;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .nav-linkedin-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .nav-linkedin-btn:hover {
+      color: #0a66c2;
+      background: rgba(10, 102, 194, 0.1);
+      border-color: rgba(10, 102, 194, 0.35);
+      transform: translateY(-1px);
+    }
+    .btn-nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      color: #ffffff;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-nav-cta:hover {
+      background: #5457e5;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    }
+
+    /* Hamburger & Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 0;
+      gap: 5px;
+      transition: var(--transition);
+    }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(9, 11, 16, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      padding: 24px 20px 40px;
+      overflow-y: auto;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 999;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-drawer.active {
+      display: flex;
+    }
+    .mobile-drawer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .mobile-drawer-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+      padding: 0 8px;
+    }
+    .mobile-drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition);
+    }
+    .mobile-drawer-link:hover, .mobile-drawer-link.active {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.3);
+      color: #ffffff;
+    }
+    .mobile-drawer-icon {
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+    .mobile-drawer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-linkedin-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(10, 102, 194, 0.1);
+      border: 1px solid rgba(10, 102, 194, 0.3);
+      color: #0a66c2;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .btn:hover { background: #5457e5; }
+
+    .article-header { padding: 64px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+    .crumb { font-size: 0.82rem; color: var(--text-sub); margin-bottom: 20px; }
+    .crumb a { color: var(--text-muted); }
+    .crumb a:hover { color: #ffffff; }
+
+    .tag-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    .article-title {
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    .author-info { display: flex; align-items: center; gap: 10px; }
+    .author-avatar { width: 28px; height: 28px; border-radius: 50%; }
+
+    .article-content { font-size: 1.05rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 64px; }
+    .article-content h2 { font-size: 1.75rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin: 48px 0 18px; line-height: 1.3; }
+    .article-content h3 { font-size: 1.3rem; font-weight: 700; color: #f1f5f9; margin: 32px 0 14px; }
+    .article-content p { margin-bottom: 24px; }
+    .article-content ul, .article-content ol { margin: 0 0 24px 24px; display: flex; flex-direction: column; gap: 10px; }
+    .article-content li { color: #cbd5e1; }
+    .article-content strong { color: #ffffff; }
+
+    .callout {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 20px 24px;
+      margin: 32px 0;
+      font-size: 0.98rem;
+    }
+    .callout-title { font-weight: 700; color: #ffffff; margin-bottom: 6px; font-size: 1rem; }
+
+    pre {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 28px 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: #e6edf3;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #93c5fd;
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+
+    .author-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      margin: 64px 0;
+    }
+    .author-card-avatar { width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--border-hover); flex-shrink: 0; }
+
+    footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--text-muted); font-size: 0.86rem; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: #ffffff; }
+
+    @media (max-width: 1080px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 720px) {
+      .author-card { flex-direction: column; text-align: center; }
+      .article-title { font-size: 2.1rem; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+      .btn-nav-cta { display: none; }
+    }
+  </style>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-M335RXDF');</script>
+  <!-- End Google Tag Manager -->
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M335RXDF"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header>
+    <div class="container">
+      <nav aria-label="Main Navigation">
+        <a href="../index.html" class="brand" aria-label="Pravesh Singh homepage">
+          <picture>
+            <source srcset="../images/pravesh-singh.webp" type="image/webp">
+            <img class="brand-avatar" src="../images/pravesh-singh.png" alt="Pravesh Singh" width="40" height="40" loading="eager">
+          </picture>
+          <div class="brand-text">
+            <span class="brand-name">Pravesh Singh</span>
+            <span class="brand-role">Founder &amp; CTO</span>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <div class="nav-item">
+            <a href="../about.html" class="nav-link">About</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="../index.html#software" class="nav-link" aria-haspopup="true" aria-expanded="false">
+              <span>Systems</span>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+            <div class="nav-dropdown" role="menu">
+              <a href="../icare.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">🏥</div>
+                <div>
+                  <div class="dropdown-title">iCare Platform</div>
+                  <div class="dropdown-desc">Clinical registry &amp; cold-chain drug logistics</div>
+                </div>
+              </a>
+              <a href="../taskedge.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">⚡</div>
+                <div>
+                  <div class="dropdown-title">TaskEdge SaaS</div>
+                  <div class="dropdown-desc">Multi-tenant business &amp; operations OS</div>
+                </div>
+              </a>
+              <a href="../automation.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">🤖</div>
+                <div>
+                  <div class="dropdown-title">AI &amp; Automation</div>
+                  <div class="dropdown-desc">Deterministic extraction &amp; document ETL</div>
+                </div>
+              </a>
+              <a href="../industries.html" class="dropdown-link" role="menuitem">
+                <div class="dropdown-icon">🌐</div>
+                <div>
+                  <div class="dropdown-title">Industries &amp; Sectors</div>
+                  <div class="dropdown-desc">Healthcare, Deskless Ops, FinTech &amp; DPI</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="nav-item">
+            <a href="../expertise.html" class="nav-link">Expertise</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="index.html" class="nav-link active">Writing</a>
+          </div>
+
+          <div class="nav-item">
+            <a href="../index.html#events" class="nav-link">Talks</a>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener noreferrer" class="nav-linkedin-btn" aria-label="Connect with Pravesh Singh on LinkedIn" title="LinkedIn Profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+
+          <a href="../expertise.html#inquiry" class="btn-nav-cta">Start a Project</a>
+
+          <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-drawer-section">
+        <div class="mobile-drawer-label">Platform Overview</div>
+        <a href="../about.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">👤</span>
+          <span>About Pravesh</span>
+        </a>
+        <a href="../expertise.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">💼</span>
+          <span>Technical Expertise &amp; Advisory</span>
+        </a>
+        <a href="index.html" class="mobile-drawer-link active" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">📝</span>
+          <span>Engineering Essays &amp; Writing</span>
+        </a>
+        <a href="../index.html#events" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🎤</span>
+          <span>Keynotes &amp; Workshops</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-section">
+        <div class="mobile-drawer-label">Flagship Systems</div>
+        <a href="../icare.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🏥</span>
+          <span>iCare Healthcare Platform</span>
+        </a>
+        <a href="../taskedge.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">⚡</span>
+          <span>TaskEdge Operations SaaS</span>
+        </a>
+        <a href="../automation.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🤖</span>
+          <span>AI &amp; Document Automation</span>
+        </a>
+        <a href="../industries.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+          <span class="mobile-drawer-icon">🌐</span>
+          <span>Industry Footprint</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-actions">
+        <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener noreferrer" class="mobile-linkedin-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <span>Connect on LinkedIn</span>
+        </a>
+        <a href="../expertise.html#inquiry" class="btn-nav-cta" style="justify-content:center; padding:12px;" onclick="closeMobileMenu()">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article>
+        <header class="article-header">
+          <div class="crumb">
+            <a href="../index.html">Home</a> &nbsp;/&nbsp; <a href="index.html">Writing</a> &nbsp;/&nbsp; <span>Applied AI &amp; LLMs</span>
+          </div>
+          <span class="tag-badge">Applied AI &amp; LLMs</span>
+          <h1 class="article-title">Structured Data Extraction with LLMs: Pushing Beyond Prompt Engineering</h1>
+          <div class="article-meta">
+            <div class="author-info">
+              <img class="author-avatar" src="../images/pravesh-singh.png" alt="Pravesh Singh">
+              <span>Pravesh Singh</span>
+            </div>
+            <span>•</span>
+            <span>May 18, 2026</span>
+            <span>•</span>
+            <span>11 min read</span>
+          </div>
+        </header>
+
+        <div class="article-content">
+          <p>
+            When teams first prototype document automation using modern Large Language Models (LLMs), results appear magical. You pass an invoice, a scanned lab report, or a complex contract with a prompt saying <em>"Return the invoice total and line items in JSON"</em>, and 85% of the time, the model outputs clean, correct JSON.
+          </p>
+
+          <p>
+            Then you push to production.
+          </p>
+
+          <p>
+            In production, the 15% long-tail failures quickly overwhelm human operators: markdown fences around JSON, subtle hallucinations in dates, phantom line items that don't add up to the total, or invalid JSON syntax that breaks backend parsers.
+          </p>
+
+          <p>
+            At SoftEdge, we build high-accuracy document intelligence pipelines processing millions of clinical, logistical, and financial records. Here is how we engineer deterministic extraction pipelines that achieve 99.8%+ schema fidelity.
+          </p>
+
+          <h2>1. The Four Flaws of Naive Prompt Engineering</h2>
+
+          <ul>
+            <li><strong>Syntax Non-Determinism:</strong> Prompts like "Output only JSON" cannot guarantee valid syntax. Models can truncate tokens mid-array, emit trailing commas, or inject unescaped quotes.</li>
+            <li><strong>Mathematical Inconsistency:</strong> LLMs are probabilistic token predictors, not calculators. They will happily extract 5 line items totaling $450 while reporting a grand total of $520 from the same document.</li>
+            <li><strong>Phantom Field Invention:</strong> When an expected field (e.g. <code>tax_id</code>) is absent from the input document, the model often hallucinate a plausible value rather than returning <code>null</code>.</li>
+            <li><strong>Costly Full-Document Retries:</strong> When an extraction contains a single validation error, re-running the entire 10-page document burns tokens and risks introducing new hallucinations in previously correct fields.</li>
+          </ul>
+
+          <h2>2. The Architecture: Constrained Decoding &amp; Multi-Pass Validation</h2>
+
+          <p>
+            A production document processing system separates fuzzy semantic parsing from deterministic mathematical validation:
+          </p>
+
+          <pre><code>[Scanned PDF / Image]
+         │
+         ▼
+[1. Layout-Aware OCR & Spatial Chunking] ── (Extract tables, bounding boxes)
+         │
+         ▼
+[2. Constrained LLM Extraction] ────────── (Guaranteed schema via JSON Schema / Tool Call)
+         │
+         ▼
+[3. Deterministic Invariant Checks] ───── (Zod / Pydantic mathematical & range bounds)
+         │
+         ├─ Passed ──► [Production Database]
+         │
+         └─ Failed ──► [4. Targeted Delta Correction Loop]
+                             │
+                             ├─ Fixed ──► [Production Database]
+                             └─ Unresolved ──► [Human-in-the-Loop Queue]</code></pre>
+
+          <h2>3. Enforcing Strict Types with Pydantic &amp; Instructor</h2>
+
+          <p>
+            Instead of raw text generation, we use constrained decoding (OpenAI Structured Outputs or Claude tool use) bound to typed schemas with strict validation rules:
+          </p>
+
+          <pre><code>from pydantic import BaseModel, Field, field_validator
+from typing import List, Optional
+from decimal import Decimal
+
+class LineItem(BaseModel):
+    description: str = Field(description="Item name or service description")
+    quantity: Decimal = Field(gt=0, description="Quantity delivered")
+    unit_price: Decimal = Field(gt=0, description="Price per single unit")
+    total_amount: Decimal = Field(gt=0, description="Quantity * unit_price")
+
+    @field_validator("total_amount")
+    @classmethod
+    def validate_math(cls, v, values):
+        # Enforce mathematical rigor before accepting payload
+        if "quantity" in values.data and "unit_price" in values.data:
+            expected = values.data["quantity"] * values.data["unit_price"]
+            if abs(v - expected) > Decimal("0.05"):
+                raise ValueError(f"Math mismatch: {values.data['quantity']} * {values.data['unit_price']} != {v}")
+        return v
+
+class InvoicePayload(BaseModel):
+    invoice_number: str
+    invoice_date: str
+    vendor_gstin: Optional[str] = Field(None, pattern=r"^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$")
+    items: List[LineItem]
+    subtotal: Decimal
+    tax_amount: Decimal
+    grand_total: Decimal</code></pre>
+
+          <h2>4. The Targeted Delta Correction Loop</h2>
+
+          <p>
+            When a Pydantic validation rule fails, never send the original prompt back to the LLM. Instead, isolate the exact schema failure and prompt the model with a <strong>targeted delta diff</strong>:
+          </p>
+
+          <pre><code>{
+  "system": "You are a data validation assistant. Fix the following specific extraction error without modifying valid fields.",
+  "error_context": {
+    "field": "items[2].total_amount",
+    "extracted_value": 450.00,
+    "validation_error": "Math mismatch: quantity (4) * unit_price (100.00) != 450.00",
+    "document_snippet": "Line 3: 4 x High-Grade Filter Units @ 100.00/unit | Total: 400.00"
+  },
+  "instruction": "Output the corrected LineItem JSON object."
+}</code></pre>
+
+          <h2>5. Human-in-the-Loop with Spatial Grounding</h2>
+
+          <p>
+            Even with 99.8% extraction fidelity, mission-critical systems (such as medical dosing or million-dollar invoices) require human sign-off on anomalies.
+          </p>
+
+          <p>
+            By storing the exact pixel bounding boxes alongside each extracted token during Step 1 (Layout-Aware OCR), the review UI can highlight the exact phrase on the original scanned document when a flag is raised.
+          </p>
+
+          <p>
+            This hybrid approach turns a tedious manual data entry job into a 5-second verification task, slashing processing costs by 80% while achieving 100% downstream data integrity.
+          </p>
+        </div>
+
+        <div class="author-card">
+          <img class="author-card-avatar" src="../images/pravesh-singh.png" alt="Pravesh Singh">
+          <div>
+            <h3 style="font-size:1.15rem; font-weight:700; color:#ffffff; margin-bottom:6px;">Written by Pravesh Singh</h3>
+            <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.6; margin-bottom:12px;">
+              Founder, Managing Director &amp; CTO at SoftEdge Technology Solutions. Architect of mission-critical healthcare networks and multi-tenant SaaS platforms. Advises founders and executive engineering teams on high-consequence system architecture.
+            </p>
+            <div style="display:flex; gap:16px; font-size:0.88rem; font-weight:600;">
+              <a href="../expertise.html" style="color:#818cf8;">View Engagement Packages &rarr;</a>
+              <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener" style="color:var(--teal);">Connect on LinkedIn &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>
+          <div style="font-weight:600; color:#ffffff;">Pravesh Singh</div>
+          <div style="font-size:0.8rem; color:var(--text-sub); margin-top:2px;">
+            Managing Director &amp; CTO, SoftEdge Technology Solutions · praveshsingh.com
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href="../about.html">About</a>
+          <a href="../icare.html">iCare</a>
+          <a href="../taskedge.html">TaskEdge</a>
+          <a href="../automation.html">AI Solutions</a>
+          <a href="../industries.html">Industries</a>
+          <a href="../expertise.html">Expertise</a>
+          <a href="index.html">Writing</a>
+          <a href="../llms.txt" target="_blank" rel="noopener">llms.txt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMobileMenu() {
+      const isOpen = mobileMenu.classList.toggle('active');
+      hamburgerBtn.classList.toggle('active', isOpen);
+      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      hamburgerBtn.classList.remove('active');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+</body>
+</html>

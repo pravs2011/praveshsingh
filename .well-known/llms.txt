@@ -1,106 +1,86 @@
 # Pravesh Singh
 
-> Official machine-readable context for praveshsingh.com.
+> Official machine-readable context and site index for praveshsingh.com.
+> Last updated: 2026-09-21 · Language: en-IN
 
-## Identity
+## Identity & Executive Positioning
 
-Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. He designs software systems for healthcare operations, business teams, and public sector programs.
+Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. With 15+ years of software architecture and hands-on engineering experience, he designs mission-critical clinical healthcare platforms, multi-tenant SaaS products, deterministic automation pipelines, and enterprise systems across public and private sectors.
 
-## Key Roles
+## Key Roles & Affiliations
 
-- Managing Director & CTO, SoftEdge Technology Solutions
-- Software Architect and Creator, iCare (Digital Patient Registry and Medicine Inventory Platform)
-- Software Architect and Creator, TaskEdge (Operations Task Management SaaS)
+- **Managing Director & CTO**, SoftEdge Technology Solutions (https://softedgetechnology.com)
+- **Software Architect & Creator**, iCare (Digital Clinical Registry & Biological Cold-Chain Inventory Platform)
+- **Software Architect & Creator**, TaskEdge (Multi-Tenant Operations Task Management SaaS)
+- **Direct Technical Advisor & Fractional CTO** on healthcare integrations, database architecture, and compliance.
 
-## Focus Areas
+## Capability Pillars
 
-- Healthcare software: Digital patient registries, Ayushman Bharat Digital Mission (ABDM) compliance, and hospital pharmacy stock logistics.
-- Web applications and cloud architecture: Multi-tenant systems, REST APIs, database indexing, and containerized deployments.
-- Practical data automation: Document processing and retrieval systems (RAG) applied to administrative and clinic workflows.
-
-## Technical Expertise & Services
-
-Pravesh Singh works across three practice areas: app development, SaaS product engineering, and consulting/advisory.
-
-### App Development
-- Cross-platform mobile applications built from a single codebase for both iOS and Android.
-- Native iOS and Android development where platform capability or performance requires it.
-- Progressive web apps that install to a home screen, work offline, and need no app store distribution.
-- Web application front-ends: dashboards, admin panels, and internal operational tools.
-
-### SaaS Product Engineering
-- Multi-tenant architecture with strict per-account data isolation and permission layers.
-- API and database design built to stay fast as data grows into millions of rows.
-- Billing-ready account models, notifications, and audit trails from the start.
-- Cloud deployment and operations (Linux, Docker, AWS, Nginx).
-
-### Consulting & Technical Advisory
-- Software architecture and code review, with prioritised remediation guidance.
-- System design for new products, migrations, and government or partner integrations.
-- Technology selection grounded in what the client team can maintain long-term.
-- Delivery guidance: scoping, sequencing, review standards, and technical roadmaps.
-
-### Core Technical Skills
-- Mobile & client: cross-platform mobile, native iOS/Android, PWA, offline-first design.
-- Backends & APIs: Node.js, TypeScript, Express, REST, authentication and RBAC.
-- Databases: PostgreSQL, MongoDB, Redis — data modeling, indexing, query optimisation.
-- Infrastructure: Linux, Docker, AWS, Nginx reverse proxies.
-- Security & compliance: RBAC, token authentication, encryption at rest, audit trails, ABDM.
-- Automation & applied AI: document extraction, retrieval pipelines (RAG), reporting automation.
-
-### Engagement Model
-Engagements follow a four-step sequence: conversation (no-cost introductory discussion), scope
-(agreed in writing before work begins), architecture (data model, interfaces, and deployment
-decided and documented first), then build and hand over in working increments with documentation.
-Pravesh Singh is based in India and works remotely with clients in other regions; communication
-is in English. No public pricing is listed — scope and terms are discussed directly.
-
-Full detail: https://praveshsingh.com/expertise.html
+1. **Mission-Critical Healthcare Platforms:** Specialized in Ayushman Bharat Digital Mission (ABDM M1/M2/M3) integrations, HL7 FHIR R4 interoperability, offline-tolerant clinical hospital systems, and cold-chain medicine inventory ledgers.
+2. **Multi-Tenant SaaS Engineering:** PostgreSQL Row-Level Security (RLS) isolation, high-concurrency API performance, tenant-aware database sharding, audit-ready compliance trails, and enterprise role-based access control (RBAC).
+3. **Deterministic Applied AI & Data Extraction:** Moving beyond prompt engineering through schema-constrained LLM generation (JSON Schema / Pydantic), mathematical invariant validation, citation anchoring, and automated ETL pipelines.
+4. **Fractional CTO & Architecture Advisory:** Technology due diligence, code & security audits, modernization roadmaps, database query optimization, and DPDP Act 2023 compliance consulting.
 
 ## Primary Software Systems
 
-### iCare
-iCare is a digital registry and medicine inventory platform for hemophilia and thalassemia care. Deployed in treatment centres across Punjab and Madhya Pradesh, it provides:
-- Portable patient records allowing patients to receive verified treatment at any connected hospital.
-- Real-time clotting factor concentrate inventory tracking and inter-hospital stock transfers to prevent treatment shortages.
-- Structured records aligned with Ayushman Bharat Digital Mission (ABDM) standards and state health department reporting.
+### iCare (Clinical Registry & Inventory Logistics)
+- **Overview:** State-deployed clinical patient registry and cold-chain biological medicine inventory platform for hemophilia and thalassemia care.
+- **Impact:** Live across state hospital networks in Punjab and Madhya Pradesh.
+- **Key Features:** Cross-hospital portable patient profiles, double-entry biological inventory ledgers (Factor VIII/IX), nearest-expiry (FEFO) allocation, ABDM FHIR R4 compatibility, and real-time state health commissioner analytics.
+- **URL:** https://praveshsingh.com/icare.html
 
-### TaskEdge
-TaskEdge is a web application for operations teams to assign tasks, follow daily execution, and manage shift handovers.
+### TaskEdge (Operations Management SaaS)
+- **Overview:** Fast, low-overhead multi-tenant operations execution system designed for deskless and shift-based teams.
+- **Key Features:** True tenant isolation, sub-50ms task updates, structured shift handovers, zero-training UX, and automated audit logging.
+- **URL:** https://praveshsingh.com/taskedge.html
 
-### Data Automation
-Internal tools that use language models to extract structured data from scanned forms and technical manuals.
+### Practical AI & Automation Engines
+- **Overview:** Deterministic extraction and document automation pipelines for clinical discharge summaries, government reporting formats, and high-volume financial invoices.
+- **URL:** https://praveshsingh.com/automation.html
+
+## Commercial Engagement Packages & Advisory
+
+All advisory work is delivered directly by Pravesh Singh. Turnkey platform builds and SLA-backed engineering teams are executed through SoftEdge Technology Solutions.
+
+1. **System Architecture & Codebase Audit:** 2-week fixed-scope engagement evaluating scalability bottlenecks, PostgreSQL performance, security posture, and multi-tenancy boundaries. Deliverables include prioritized findings and executive roadmap.
+2. **Fractional CTO & Technical Advisory:** Retainer-based partnership (10–20 hrs/month) providing architectural steering, hiring evaluation, technology selection, and board/investor representation.
+3. **ABDM & Healthcare Integration Sprint:** Fixed-scope integration sprint delivering production-ready M1/M2/M3 milestone compliance, FHIR R4 document mapping, ABHA authentication, and sandbox certification.
+4. **Custom SaaS & Platform Engineering:** Full lifecycle platform builds executed by dedicated SoftEdge engineering squads under direct CTO oversight with milestone delivery and IP assignment.
+
+Full commercial transparency & inquiry generator: https://praveshsingh.com/expertise.html
+
+## Technical Writing & Architectural Essays
+
+Pravesh Singh authors in-depth, production-grounded engineering guides on systems architecture:
+- **Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Offline-Tolerant Hospital Software:** https://praveshsingh.com/writing/offline-tolerant-hospital-software.html (Engineering clinical software for intermittent power and high-latency hospital counters).
+- **ABDM Integration Developer Guide:** https://praveshsingh.com/writing/abdm-integration-developer-guide.html (A pragmatic engineering walkthrough of ABHA, HIP/HIU, FHIR R4 JSON, and ECDH encryption).
+- **Multi-Tenant PostgreSQL Isolation:** https://praveshsingh.com/writing/multi-tenant-postgresql-isolation.html (Schema-per-Tenant vs Shared-Schema RLS, connection pooling with PgBouncer, and performance benchmarks).
+- **Double-Entry Medicine Inventory Ledgers:** https://praveshsingh.com/writing/high-value-medicine-inventory-logistics.html (Applying immutable financial ledger accounting to biological pharmaceuticals).
+- **Structured Data Extraction with LLMs:** https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html (Schema-constrained decoding, Pydantic validation loops, and invoice parsing).
+- **DPDP Act 2023 HealthTech Architecture:** https://praveshsingh.com/writing/dpdp-act-2023-health-tech-checklist.html (10-point engineering checklist for consent management, erasure, and audit logging).
+
+## Site Structure & Navigation
+
+- **Home:** https://praveshsingh.com/
+- **About:** https://praveshsingh.com/about.html
+- **iCare Platform:** https://praveshsingh.com/icare.html
+- **TaskEdge Platform:** https://praveshsingh.com/taskedge.html
+- **AI Solutions:** https://praveshsingh.com/automation.html
+- **Industries & Domain Expertise:** https://praveshsingh.com/industries.html
+- **Commercial Expertise & Engagements:** https://praveshsingh.com/expertise.html
+- **Technical Writing Hub:** https://praveshsingh.com/writing/index.html
 
 ## Public Presentations & Workshops
 
-1. Capacity Building Workshop on Hemophilia Treatment (Chandigarh, Nov 27, 2024):
-   - Presented on digital records in blood disorder care alongside Chief Guest Sh. Ghanshyam Thori, IAS (Mission Director, National Health Mission, Punjab).
-   - Received state recognition for software contributions to the Punjab health program.
+1. **Capacity Building Workshop on Hemophilia Treatment (Chandigarh, Nov 27, 2024):** Presented with Sh. Ghanshyam Thori, IAS (MD, NHM Punjab); honored for digital healthcare contributions.
+2. **National Hemophilia Consensus Meeting (Bhopal, May 22, 2025):** Live multi-hospital patient lookup and inventory logistics demonstration before medical college deans and state directors.
+3. **Hemophilia & Thalassemia Summit (Faridkot, Nov 7–8, 2023):** Speaker and Guest of Honour at Guru Gobind Singh Medical College (BFUHS).
+4. **PSACS & NACO Digital Training (Chandigarh, July 30, 2025):** Technical hands-on training for medical and administrative staff on digital patient intake and ABDM formats.
 
-2. National Hemophilia Consensus Meeting (Bhopal, May 22, 2025):
-   - Demonstrated iCare live before medical college deans, clinicians, and health mission authorities.
-   - Showcased cross-hospital patient lookup and real-time medicine inventory transfers.
+## Contact & Direct Channels
 
-3. Hemophilia & Thalassemia Summit 2023 (Faridkot, Nov 7–8, 2023):
-   - Speaker and Guest of Honour at Guru Gobind Singh Medical College (Baba Farid University of Health Sciences).
-   - Presented the initial release of the patient registry platform to attending doctors and patient families.
-
-4. Punjab State AIDS Control Society (PSACS) Staff Training (Chandigarh, July 30, 2025):
-   - Conducted a hands-on training workshop for PSACS and NACO personnel on digital patient intake, pharmacy tracking, and ABDM data formats.
-
-## Official Links
-
-- Website: https://praveshsingh.com/
-- Technical Expertise: https://praveshsingh.com/expertise.html
-- LinkedIn: https://www.linkedin.com/in/praveshsingh/
-- Company: https://softedgetechnology.com/
-- Email: hello@praveshsingh.com
-
-## Machine-Readable Endpoints
-
-- https://praveshsingh.com/llms.txt — concise site index (this file)
-- https://praveshsingh.com/llms-full.txt — full site content in one document
-- https://praveshsingh.com/expertise.md — markdown twin of the Technical Expertise page
-- https://praveshsingh.com/sitemap.xml — XML sitemap
-- https://praveshsingh.com/robots.txt — crawler directives, including explicit AI crawler permissions
-- https://praveshsingh.com/.well-known/security.txt — security contact (RFC 9116)
+- **Email:** hello@praveshsingh.com
+- **LinkedIn:** https://www.linkedin.com/in/praveshsingh/
+- **Company Website:** https://softedgetechnology.com/
+- **Location:** Mohali / Chandigarh / New Delhi, India (Works with global teams remotely)

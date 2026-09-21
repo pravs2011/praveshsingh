@@ -1,0 +1,76 @@
+# ----------------------------------------------------------------------
+# .htaccess — praveshsingh.com
+# Canonicalization, 301 Redirects, 403 Elimination & Security Headers
+# ----------------------------------------------------------------------
+
+# Prevent directory listing without throwing 403 when index file is requested
+Options -Indexes
+
+# Set default directory index
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Enforce HTTPS & Canonical Domain (non-www)
+  # Redirects http://, http://www., and https://www. to https://praveshsingh.com
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^www\.praveshsingh\.com$ [NC]
+  RewriteRule ^(.*)$ https://praveshsingh.com/$1 [R=301,L]
+
+  # 2. Canonicalize /index.html -> /
+  # Fixes GSC "Alternative page with proper canonical tag"
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html(?:\?[^\ ]*)?\ HTTP/ [NC]
+  RewriteRule ^index\.html$ https://praveshsingh.com/ [R=301,L]
+
+  # 3. Redirect direct directory requests to homepage (prevents 403 Forbidden)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} ^/(images|images/.*|\.well-known)/?$ [NC]
+  RewriteRule ^ https://praveshsingh.com/ [R=301,L]
+</IfModule>
+
+# Fallback error handlers to eliminate 403 Forbidden errors
+ErrorDocument 403 /index.html
+ErrorDocument 404 /index.html
+
+# MIME Types & UTF-8 Encoding
+<IfModule mod_mime.c>
+  AddType text/markdown .md
+  AddType text/plain .txt
+  AddType application/json .json
+  AddType application/xml .xml
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddCharset UTF-8 .html .md .txt .json .xml
+</IfModule>
+
+# Security & Cache Control Headers
+<IfModule mod_headers.c>
+  # Protect against clickjacking and MIME-sniffing
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # Ensure robots.txt, sitemap.xml, llms.txt are accessible to all AI/Search bots
+  <FilesMatch "\.(txt|xml|md)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  # Cache static image assets for 1 year
+  <FilesMatch "\.(png|webp|jpg|jpeg|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Cache HTML for 1 hour with revalidation
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Compression for fast delivery
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
