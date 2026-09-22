@@ -554,6 +554,58 @@
 
     gtag('config', 'G-2XHZ5NJZLK');
   </script>
+
+  <!-- GA4 custom events: CTA clicks, contact clicks, form leads -->
+  <script>
+    (function () {
+      function track(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, params || {});
+      }
+      window.trackEvent = track;
+
+      document.addEventListener('click', function (e) {
+        var el = e.target instanceof Element ? e.target : null;
+        if (!el) return;
+
+        var link = el.closest('a[href]');
+        if (link) {
+          var href = link.getAttribute('href') || '';
+          var text = (link.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+          var host = link.closest('section[id], header, footer');
+          var section = host ? (host.id || host.tagName.toLowerCase()) : 'page';
+
+          if (/^mailto:|^tel:/i.test(href)) {
+            track('generate_lead', {
+              method: /^mailto:/i.test(href) ? 'email' : 'phone',
+              link_text: text,
+              section: section
+            });
+            return;
+          }
+          if (link.closest('.btn')) {
+            track('cta_click', {
+              cta_text: text,
+              link_url: href,
+              link_type: /^https?:\/\//i.test(href) ? 'external' : 'internal',
+              section: section
+            });
+          }
+          // Plain text links: outbound handled by GA4 enhanced measurement
+          return;
+        }
+
+        var btn = el.closest('button, [role="button"]');
+        if (btn) {
+          var bHost = btn.closest('section[id], header, footer');
+          track('cta_click', {
+            cta_text: (btn.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80),
+            link_type: 'button',
+            section: bHost ? (bHost.id || bHost.tagName.toLowerCase()) : 'page'
+          });
+        }
+      }, { passive: true });
+    })();
+  </script>
 </head>
 
 <body>
