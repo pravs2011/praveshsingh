@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Health-Tech Engineering Glossary — ABDM, FHIR, FEFO, RLS, DPDP | Pravesh Singh</title>
+  <meta name="description" content="Plain-language engineering definitions for Indian health-tech: ABDM milestones M1/M2/M3, ABHA, HIP vs HIU, FHIR R4 bundles, FEFO allocation, PostgreSQL Row-Level Security, consent artifacts, and DPDP Act 2023 terms.">
+  <meta name="author" content="Pravesh Singh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#090b10">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://praveshsingh.com/glossary.html">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="alternate" type="application/atom+xml" href="https://praveshsingh.com/writing/feed.xml" title="Engineering Essays (Atom)">
+  <link rel="describedby" type="text/plain" href="https://praveshsingh.com/llms.txt" title="Site index for language models">
+  <link rel="security-policy" href="https://praveshsingh.com/.well-known/security.txt">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Health-Tech Engineering Glossary — ABDM, FHIR, FEFO, RLS, DPDP">
+  <meta property="og:description" content="Plain-language engineering definitions for Indian health-tech: ABDM, ABHA, HIP/HIU, FHIR R4, FEFO, RLS, consent artifacts, DPDP.">
+  <meta property="og:url" content="https://praveshsingh.com/glossary.html">
+  <meta property="og:site_name" content="Pravesh Singh">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://praveshsingh.com/images/og-default.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Health-Tech Engineering Glossary — ABDM, FHIR, FEFO, RLS, DPDP">
+  <meta name="twitter:description" content="Plain-language definitions: ABDM milestones, ABHA, HIP vs HIU, FHIR R4, FEFO, Row-Level Security, consent artifacts, DPDP 2023.">
+  <meta name="twitter:image" content="https://praveshsingh.com/images/og-default.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://praveshsingh.com/glossary.html#webpage",
+        "url": "https://praveshsingh.com/glossary.html",
+        "name": "Health-Tech Engineering Glossary",
+        "description": "Plain-language engineering definitions for Indian health-tech: ABDM, ABHA, HIP/HIU, FHIR R4, FEFO, Row-Level Security, consent artifacts, and DPDP Act 2023 terms.",
+        "inLanguage": "en-IN",
+        "dateModified": "2026-09-23",
+        "author": { "@id": "https://praveshsingh.com/#person" },
+        "breadcrumb": { "@id": "https://praveshsingh.com/glossary.html#breadcrumb" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://praveshsingh.com/glossary.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://praveshsingh.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://praveshsingh.com/glossary.html" }
+        ]
+      },
+      {
+        "@type": "DefinedTermSet",
+        "@id": "https://praveshsingh.com/glossary.html#termset",
+        "name": "Indian Health-Tech Engineering Glossary",
+        "description": "Engineering definitions for ABDM, FHIR, inventory logistics, multi-tenancy, and Indian data-protection terms, written from production deployment experience.",
+        "hasDefinedTerm": [
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#abdm",
+            "name": "ABDM (Ayushman Bharat Digital Mission)",
+            "description": "India's national digital health network, stewarded by the National Health Authority. It connects hospitals, labs, and apps through a central gateway for identity (ABHA), consent, and metadata routing — while clinical records travel point-to-point between providers, never through the centre.",
+            "url": "https://praveshsingh.com/glossary.html#abdm"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#abdm-milestones",
+            "name": "ABDM Milestones (M1, M2, M3)",
+            "description": "The three ABDM integration stages: M1 — ABHA number creation and verification; M2 — linking care contexts (visits, prescriptions, reports) to a patient's ABHA address; M3 — consent-driven health data exchange between HIP and HIU using FHIR R4 bundles and ECDH encryption.",
+            "url": "https://praveshsingh.com/glossary.html#abdm-milestones"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#abha",
+            "name": "ABHA (Ayushman Bharat Health Account)",
+            "description": "A 14-digit health identifier with an address like user@abdm, created via Aadhaar or mobile OTP. ABHA links a patient's health records across providers; it stores consent and linking metadata, not the records themselves.",
+            "url": "https://praveshsingh.com/glossary.html#abha"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#hip-hiu",
+            "name": "HIP and HIU",
+            "description": "HIP (Health Information Provider) is any system that holds and shares patient clinical data — a hospital EMR or lab system. HIU (Health Information User) is any authorized system that requests that data with patient consent, such as a teleconsultation app or specialist portal.",
+            "url": "https://praveshsingh.com/glossary.html#hip-hiu"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#fhir-r4",
+            "name": "FHIR R4 (Fast Healthcare Interoperability Resources, Release 4)",
+            "description": "The HL7 standard for exchanging health data as structured JSON resources (Patient, Composition, DiagnosticReport). Under ABDM, records must be packaged as FHIR R4 document bundles following the NDHM implementation profiles published by NRCeS.",
+            "url": "https://praveshsingh.com/glossary.html#fhir-r4"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#care-context",
+            "name": "Care Context",
+            "description": "A linkable unit of healthcare — one visit, prescription, diagnostic report, or discharge summary. Linking a care context to a patient's ABHA address is what makes that record discoverable through consent-driven ABDM data requests.",
+            "url": "https://praveshsingh.com/glossary.html#care-context"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#consent-artifact",
+            "name": "Consent Artifact",
+            "description": "A cryptographically signed digital document capturing what data a patient agreed to share, with whom, for what purpose, and until when. ABDM data exchanges must carry a valid consent artifact; it is machine-verifiable and revocable by the patient.",
+            "url": "https://praveshsingh.com/glossary.html#consent-artifact"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#fefo",
+            "name": "FEFO (First-Expired, First-Out)",
+            "description": "An inventory allocation policy for perishable goods: always dispense the batch expiring soonest first. For blood-factor concentrates and vaccines, FEFO enforced by database row locks (SELECT ... FOR UPDATE SKIP LOCKED) prevents both expired waste and emergency stock-outs.",
+            "url": "https://praveshsingh.com/glossary.html#fefo"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#cold-chain",
+            "name": "Cold Chain",
+            "description": "The temperature-controlled supply chain required for biological medicines such as clotting factors and vaccines. In software terms: continuous temperature telemetry, batch-level expiry tracking, and alerts before excursions or expiry, not after.",
+            "url": "https://praveshsingh.com/glossary.html#cold-chain"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#rls",
+            "name": "Row-Level Security (RLS)",
+            "description": "A PostgreSQL feature that filters rows per database session using a policy (e.g. tenant_id must match the session's tenant). Shared-schema multi-tenant SaaS uses RLS to isolate customers' data in one table set — one migration, normal connection pooling, per-row isolation.",
+            "url": "https://praveshsingh.com/glossary.html#rls"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#schema-per-tenant",
+            "name": "Schema-per-Tenant",
+            "description": "A multi-tenancy model giving each customer its own PostgreSQL schema. Strong physical isolation and easy per-tenant restores, but hundreds of schemas make every migration, connection pool, and backup exponentially harder — best suited to fewer than ~100 high-compliance tenants.",
+            "url": "https://praveshsingh.com/glossary.html#schema-per-tenant"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#dpdp",
+            "name": "DPDP Act 2023 (Digital Personal Data Protection Act)",
+            "description": "India's data-protection law. For health platforms the operative tension is the patient's Right to Erasure versus statutory medical record retention — resolved architecturally by scrubbing identifiers while retaining anonymized clinical fact, with consent state machines and immutable audit logs.",
+            "url": "https://praveshsingh.com/glossary.html#dpdp"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#data-fiduciary",
+            "name": "Data Fiduciary",
+            "description": "Under the DPDP Act, the entity that determines how personal data is processed and is accountable for it. Health platforms are data fiduciaries for patient data, which drives obligations: purpose limitation, consent management, security safeguards, and breach reporting.",
+            "url": "https://praveshsingh.com/glossary.html#data-fiduciary"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#double-entry-inventory",
+            "name": "Double-Entry Inventory Ledger",
+            "description": "Applying financial accounting to physical stock: every movement is a balanced debit/credit journal entry (e.g. Dispensed −1 from Ward A, +1 to Patient X). On-hand quantity is always a derived SUM, so stock can never silently drift — phantom stock becomes mathematically impossible.",
+            "url": "https://praveshsingh.com/glossary.html#double-entry-inventory"
+          },
+          {
+            "@type": "DefinedTerm",
+            "@id": "https://praveshsingh.com/glossary.html#offline-tolerant",
+            "name": "Offline-Tolerant Software",
+            "description": "Architecture where the local device (SQLite/IndexedDB) is the primary write path and the server is a sync target: clinical actions commit locally in milliseconds and replicate asynchronously, with domain-specific conflict resolution — so hospital counters keep working through network and power failures.",
+            "url": "https://praveshsingh.com/glossary.html#offline-tolerant"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #090b10; --bg-surface: #10141d; --bg-surface-elevated: #151a26;
+      --border: rgba(255,255,255,0.08); --border-hover: rgba(255,255,255,0.16);
+      --text: #f0f3f8; --text-muted: #9aa3b5; --text-sub: #6f788b;
+      --primary: #6366f1; --teal: #0ea5e9; --radius-sm: 8px; --radius-md: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    .container { width: min(860px, 92%); margin: 0 auto; }
+    header .container { width: min(1080px, 92%); }
+    a { color: inherit; text-decoration: none; transition: 0.2s ease; }
+
+    header { position: sticky; top: 0; z-index: 1000; background: rgba(9,11,16,0.88); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(99,102,241,0.35); }
+    .brand-name { font-weight: 700; color: #fff; }
+    .brand-role { font-size: 0.74rem; color: var(--text-muted); }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-link { padding: 8px 14px; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+    .nav-link:hover, .nav-link.active { color: #fff; background: rgba(255,255,255,0.05); }
+    @media (max-width: 820px) { .nav-links { display: none; } }
+
+    .page-hero { padding: 64px 0 40px; border-bottom: 1px solid var(--border); }
+    .eyebrow { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #818cf8; margin-bottom: 12px; }
+    h1 { font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 800; letter-spacing: -0.03em; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .lead { color: var(--text-muted); font-size: 1.05rem; max-width: 720px; }
+    .tldr { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.3); border-left: 4px solid var(--primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 18px 22px; margin-top: 24px; }
+    .tldr-title { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #818cf8; margin-bottom: 6px; }
+    .tldr p { margin: 0; color: #e2e8f0; font-size: 0.95rem; }
+
+    .toc { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 24px; margin: 32px 0; font-size: 0.92rem; }
+    .toc-title { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-sub); margin-bottom: 10px; }
+    .toc ol { margin-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+    .toc a { color: var(--text-muted); }
+    .toc a:hover { color: #fff; }
+
+    main section { padding: 8px 0 48px; }
+    .term { margin-bottom: 40px; scroll-margin-top: 96px; }
+    .term h2 { font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .term h2 a { color: var(--teal); opacity: 0.55; font-weight: 400; margin-left: 8px; }
+    .term h2 a:hover { opacity: 1; }
+    .term p { color: #cbd5e1; line-height: 1.75; font-size: 1.0rem; }
+    .term .ctx { margin-top: 10px; font-size: 0.86rem; color: var(--text-sub); }
+    .term .ctx a { color: #93c5fd; }
+
+    footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--text-muted); font-size: 0.86rem; margin-top: 32px; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav aria-label="Main Navigation">
+        <a href="index.html" class="brand" aria-label="Pravesh Singh homepage">
+          <picture>
+            <source srcset="images/pravesh-singh.webp" type="image/webp">
+            <img class="brand-avatar" src="images/pravesh-singh.png" alt="Pravesh Singh" width="40" height="40" loading="eager">
+          </picture>
+          <div>
+            <div class="brand-name">Pravesh Singh</div>
+            <div class="brand-role">Founder &amp; CTO</div>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="about.html" class="nav-link">About</a>
+          <a href="icare.html" class="nav-link">iCare</a>
+          <a href="expertise.html" class="nav-link">Expertise</a>
+          <a href="writing/index.html" class="nav-link">Writing</a>
+          <a href="speaking.html" class="nav-link">Speaking</a>
+          <a href="glossary.html" class="nav-link active">Glossary</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container page-hero">
+      <div class="eyebrow">Reference</div>
+      <h1>Health-tech engineering glossary</h1>
+      <p class="lead">Plain-language definitions of the standards, laws, and architecture patterns behind Indian digital health and multi-tenant platforms — written from production deployment experience, not documentation alone.</p>
+      <div class="tldr">
+        <div class="tldr-title">Summary</div>
+        <p>ABDM is India's national digital health network built on ABHA identifiers, HIP/HIU data exchange, and consent artifacts; records move as FHIR R4 JSON bundles. FEFO plus double-entry ledgers keep biological medicine stock accurate; Row-Level Security isolates SaaS tenants in one database; and the DPDP Act 2023 makes platforms data fiduciaries who must reconcile erasure with medical retention.</p>
+      </div>
+
+      <nav class="toc" aria-label="Glossary terms">
+        <div class="toc-title">Terms on this page</div>
+        <ol>
+          <li><a href="#abdm">ABDM (Ayushman Bharat Digital Mission)</a></li>
+          <li><a href="#abdm-milestones">ABDM Milestones (M1, M2, M3)</a></li>
+          <li><a href="#abha">ABHA</a></li>
+          <li><a href="#hip-hiu">HIP and HIU</a></li>
+          <li><a href="#fhir-r4">FHIR R4</a></li>
+          <li><a href="#care-context">Care Context</a></li>
+          <li><a href="#consent-artifact">Consent Artifact</a></li>
+          <li><a href="#fefo">FEFO</a></li>
+          <li><a href="#cold-chain">Cold Chain</a></li>
+          <li><a href="#rls">Row-Level Security (RLS)</a></li>
+          <li><a href="#schema-per-tenant">Schema-per-Tenant</a></li>
+          <li><a href="#dpdp">DPDP Act 2023</a></li>
+          <li><a href="#data-fiduciary">Data Fiduciary</a></li>
+          <li><a href="#double-entry-inventory">Double-Entry Inventory Ledger</a></li>
+          <li><a href="#offline-tolerant">Offline-Tolerant Software</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <section aria-label="Glossary definitions">
+      <div class="container">
+
+        <div class="term" id="abdm">
+          <h2>ABDM (Ayushman Bharat Digital Mission)<a href="#abdm" aria-label="Link to this term">#</a></h2>
+          <p>India's national digital health network, stewarded by the National Health Authority. It connects hospitals, labs, and apps through a central gateway for identity (ABHA), consent, and metadata routing — while clinical records travel point-to-point between providers, never through the centre.</p>
+          <p class="ctx">Related: <a href="writing/abdm-integration-developer-guide.html">ABDM integration field guide</a> · <a href="https://sandbox.abdm.gov.in/abdm-docs/getting-started" target="_blank" rel="noopener">official sandbox docs ↗</a></p>
+        </div>
+
+        <div class="term" id="abdm-milestones">
+          <h2>ABDM Milestones (M1, M2, M3)<a href="#abdm-milestones" aria-label="Link to this term">#</a></h2>
+          <p>The three ABDM integration stages: <strong>M1</strong> — ABHA number creation and verification; <strong>M2</strong> — linking care contexts (visits, prescriptions, reports) to a patient's ABHA address; <strong>M3</strong> — consent-driven health data exchange between HIP and HIU using FHIR R4 bundles and ECDH encryption.</p>
+          <p class="ctx">Related: <a href="writing/abdm-integration-developer-guide.html">M1/M2/M3 walkthrough</a></p>
+        </div>
+
+        <div class="term" id="abha">
+          <h2>ABHA (Ayushman Bharat Health Account)<a href="#abha" aria-label="Link to this term">#</a></h2>
+          <p>A 14-digit health identifier with an address like <code>user@abdm</code>, created via Aadhaar or mobile OTP. ABHA links a patient's health records across providers; it stores consent and linking metadata, not the records themselves.</p>
+        </div>
+
+        <div class="term" id="hip-hiu">
+          <h2>HIP and HIU<a href="#hip-hiu" aria-label="Link to this term">#</a></h2>
+          <p><strong>HIP</strong> (Health Information Provider) is any system that holds and shares patient clinical data — a hospital EMR or lab system. <strong>HIU</strong> (Health Information User) is any authorized system that requests that data with patient consent, such as a teleconsultation app or specialist portal.</p>
+        </div>
+
+        <div class="term" id="fhir-r4">
+          <h2>FHIR R4 (Fast Healthcare Interoperability Resources, Release 4)<a href="#fhir-r4" aria-label="Link to this term">#</a></h2>
+          <p>The HL7 standard for exchanging health data as structured JSON resources (Patient, Composition, DiagnosticReport). Under ABDM, records must be packaged as FHIR R4 document bundles following the NDHM implementation profiles published by NRCeS.</p>
+          <p class="ctx">Related: <a href="https://nrces.in/ndhm/fhir/r4/5.0.0/index.html" target="_blank" rel="noopener">ABDM FHIR implementation guide ↗</a></p>
+        </div>
+
+        <div class="term" id="care-context">
+          <h2>Care Context<a href="#care-context" aria-label="Link to this term">#</a></h2>
+          <p>A linkable unit of healthcare — one visit, prescription, diagnostic report, or discharge summary. Linking a care context to a patient's ABHA address is what makes that record discoverable through consent-driven ABDM data requests.</p>
+        </div>
+
+        <div class="term" id="consent-artifact">
+          <h2>Consent Artifact<a href="#consent-artifact" aria-label="Link to this term">#</a></h2>
+          <p>A cryptographically signed digital document capturing what data a patient agreed to share, with whom, for what purpose, and until when. ABDM data exchanges must carry a valid consent artifact; it is machine-verifiable and revocable by the patient.</p>
+        </div>
+
+        <div class="term" id="fefo">
+          <h2>FEFO (First-Expired, First-Out)<a href="#fefo" aria-label="Link to this term">#</a></h2>
+          <p>An inventory allocation policy for perishable goods: always dispense the batch expiring soonest first. For blood-factor concentrates and vaccines, FEFO enforced by database row locks (<code>SELECT ... FOR UPDATE SKIP LOCKED</code>) prevents both expired waste and emergency stock-outs.</p>
+          <p class="ctx">Related: <a href="writing/high-value-medicine-inventory-logistics.html">FEFO allocation with PostgreSQL row locks</a></p>
+        </div>
+
+        <div class="term" id="cold-chain">
+          <h2>Cold Chain<a href="#cold-chain" aria-label="Link to this term">#</a></h2>
+          <p>The temperature-controlled supply chain required for biological medicines such as clotting factors and vaccines. In software terms: continuous temperature telemetry, batch-level expiry tracking, and alerts before excursions or expiry, not after.</p>
+        </div>
+
+        <div class="term" id="rls">
+          <h2>Row-Level Security (RLS)<a href="#rls" aria-label="Link to this term">#</a></h2>
+          <p>A PostgreSQL feature that filters rows per database session using a policy (e.g. <code>tenant_id</code> must match the session's tenant). Shared-schema multi-tenant SaaS uses RLS to isolate customers' data in one table set — one migration, normal connection pooling, per-row isolation.</p>
+          <p class="ctx">Related: <a href="writing/multi-tenant-postgresql-isolation.html">schemas vs RLS decision guide</a></p>
+        </div>
+
+        <div class="term" id="schema-per-tenant">
+          <h2>Schema-per-Tenant<a href="#schema-per-tenant" aria-label="Link to this term">#</a></h2>
+          <p>A multi-tenancy model giving each customer its own PostgreSQL schema. Strong physical isolation and easy per-tenant restores, but hundreds of schemas make every migration, connection pool, and backup exponentially harder — best suited to fewer than ~100 high-compliance tenants.</p>
+        </div>
+
+        <div class="term" id="dpdp">
+          <h2>DPDP Act 2023 (Digital Personal Data Protection Act)<a href="#dpdp" aria-label="Link to this term">#</a></h2>
+          <p>India's data-protection law. For health platforms the operative tension is the patient's Right to Erasure versus statutory medical record retention — resolved architecturally by scrubbing identifiers while retaining anonymized clinical fact, with consent state machines and immutable audit logs.</p>
+          <p class="ctx">Related: <a href="writing/dpdp-act-2023-health-tech-checklist.html">10-point DPDP engineering checklist</a> · <a href="https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf" target="_blank" rel="noopener">official Act text ↗</a></p>
+        </div>
+
+        <div class="term" id="data-fiduciary">
+          <h2>Data Fiduciary<a href="#data-fiduciary" aria-label="Link to this term">#</a></h2>
+          <p>Under the DPDP Act, the entity that determines how personal data is processed and is accountable for it. Health platforms are data fiduciaries for patient data, which drives obligations: purpose limitation, consent management, security safeguards, and breach reporting.</p>
+        </div>
+
+        <div class="term" id="double-entry-inventory">
+          <h2>Double-Entry Inventory Ledger<a href="#double-entry-inventory" aria-label="Link to this term">#</a></h2>
+          <p>Applying financial accounting to physical stock: every movement is a balanced debit/credit journal entry (e.g. Dispensed −1 from Ward A, +1 to Patient X). On-hand quantity is always a derived SUM, so stock can never silently drift — phantom stock becomes mathematically impossible.</p>
+        </div>
+
+        <div class="term" id="offline-tolerant">
+          <h2>Offline-Tolerant Software<a href="#offline-tolerant" aria-label="Link to this term">#</a></h2>
+          <p>Architecture where the local device (SQLite/IndexedDB) is the primary write path and the server is a sync target: clinical actions commit locally in milliseconds and replicate asynchronously, with domain-specific conflict resolution — so hospital counters keep working through network and power failures.</p>
+          <p class="ctx">Related: <a href="writing/offline-tolerant-hospital-software.html">offline-tolerant architecture patterns</a></p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>
+          <div style="font-weight:600; color:#fff;">Pravesh Singh</div>
+          <div style="font-size:0.8rem; color:var(--text-sub); margin-top:2px;">Founder &amp; CTO, SoftEdge Technology Solutions · praveshsingh.com</div>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="writing/index.html">Writing</a>
+          <a href="speaking.html">Speaking</a>
+          <a href="company.html">Company</a>
+          <a href="llms.txt" target="_blank" rel="noopener">llms.txt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

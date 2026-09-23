@@ -4,6 +4,11 @@
 User-agent: *
 Allow: /
 
+# Never expose the local build mirror or the 404 handler
+Disallow: /build/
+Disallow: /build$
+Disallow: /404.html
+
 # ---------------------------------------------------------------------------
 # AI / LLM crawlers — explicitly permitted.
 # The wildcard rule above already allows these; naming them documents intent
@@ -65,3 +70,7 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: https://praveshsingh.com/sitemap.xml
+
+# Machine-readable site context for language models
+# https://praveshsingh.com/llms.txt
+# https://praveshsingh.com/llms-full.txt

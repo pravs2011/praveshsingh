@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Pravesh Singh — Engineering Essays</title>
+  <subtitle>Technical essays on healthcare software architecture, PostgreSQL multi-tenancy, ABDM integration, inventory ledgers, applied AI, and DPDP compliance by Pravesh Singh (Founder &amp; CTO, SoftEdge Technology Solutions).</subtitle>
+  <link href="https://praveshsingh.com/writing/index.html" rel="alternate" type="text/html"/>
+  <link href="https://praveshsingh.com/writing/feed.xml" rel="self" type="application/atom+xml"/>
+  <id>https://praveshsingh.com/writing/</id>
+  <updated>2026-09-23T00:00:00Z</updated>
+  <author>
+    <name>Pravesh Singh</name>
+    <email>hello@praveshsingh.com</email>
+    <uri>https://praveshsingh.com/</uri>
+  </author>
+  <generator>praveshsingh.com static generator</generator>
+
+  <entry>
+    <title>Architecting Offline-Tolerant Software for Indian District Hospitals</title>
+    <link href="https://praveshsingh.com/writing/offline-tolerant-hospital-software.html" rel="alternate" type="text/html"/>
+    <id>https://praveshsingh.com/writing/offline-tolerant-hospital-software.html</id>
+    <published>2026-09-15T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary>Offline-tolerant hospital software treats the device's local SQLite or IndexedDB store as the primary write path, committing every clinical action in under 15 milliseconds. Conflicts resolve per domain — immutable clinical events, column-level CRDTs, double-entry inventory ledgers — while batch sync with idempotency keys absorbs reconnection floods.</summary>
+    <category term="Healthcare Systems"/>
+  </entry>
+
+  <entry>
+    <title>ABDM Integration: A Pragmatic Engineering Guide for HealthTech Developers</title>
+    <link href="https://praveshsingh.com/writing/abdm-integration-developer-guide.html" rel="alternate" type="text/html"/>
+    <id>https://praveshsingh.com/writing/abdm-integration-developer-guide.html</id>
+    <published>2026-08-20T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary>Wire your hospital system into India's ABDM gateway as a HIP or HIU. Every gateway call is asynchronous: HTTP 202, then a signed /v0.5/ webhook callback. Production readiness spans ABHA verification (M1), care-context linking (M2), and consent-driven FHIR R4 exchange encrypted with ECDH (M3).</summary>
+    <category term="Healthcare &amp; Standards"/>
+  </entry>
+
+  <entry>
+    <title>Multi-Tenant Database Isolation in PostgreSQL: Schemas vs Row-Level Security</title>
+    <link href="https://praveshsingh.com/writing/multi-tenant-postgresql-isolation.html" rel="alternate" type="text/html"/>
+    <id>https://praveshsingh.com/writing/multi-tenant-postgresql-isolation.html</id>
+    <published>2026-07-14T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary>Shared-schema Row-Level Security (RLS) scales better than schema-per-tenant for B2B SaaS: one migration, normal PgBouncer transaction pooling, per-row tenant isolation via session-scoped tenant_id policies. Schema-per-tenant suits fewer than ~100 high-compliance enterprise customers.</summary>
+    <category term="SaaS Architecture"/>
+  </entry>
+
+  <entry>
+    <title>Double-Entry Inventory Ledgers for High-Value Cold-Chain Medicines</title>
+    <link href="https://praveshsingh.com/writing/high-value-medicine-inventory-logistics.html" rel="alternate" type="text/html"/>
+    <id>https://praveshsingh.com/writing/high-value-medicine-inventory-logistics.html</id>
+    <published>2026-06-18T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary>Every stock movement of Factor VIII/IX becomes a balanced debit/credit journal entry; on-hand quantity is a derived SUM, never a mutable counter. PostgreSQL FOR UPDATE SKIP LOCKED enforces FEFO allocation under concurrency, and the ledger survives regulatory audits with zero phantom stock.</summary>
+    <category term="Pharma Logistics"/>
+  </entry>
+
+  <entry>
+    <title>Structured Data Extraction with LLMs: Pushing Beyond Prompt Engineering</title>
+    <link href="https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html" rel="alternate" type="text/html"/>
+    <id>https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html</id>
+    <published>2026-05-12T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary>Naive prompting fails enterprise extraction on schema drift, hallucinated fields, arithmetic errors, and provenance. The production answer: schema-constrained decoding, Pydantic invariant validation, targeted delta-retry loops, and bounding-box citation anchoring — achieving &gt;99.4% field-level precision.</summary>
+    <category term="Applied AI"/>
+  </entry>
+
+  <entry>
+    <title>DPDP Act 2023: An Engineering Architecture Checklist for HealthTech Platforms</title>
+    <link href="https://praveshsingh.com/writing/dpdp-act-2023-health-tech-checklist.html" rel="alternate" type="text/html"/>
+    <id>https://praveshsingh.com/writing/dpdp-act-2023-health-tech-checklist.html</id>
+    <published>2026-04-09T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary>The DPDP Act 2023 grants patients a Right to Erasure while medical statutes mandate retention. The 10-point engineering checklist covers consent-manager state machines, purpose-limitation schemas, cryptographic scrubbing, fiduciary access controls, and immutable audit logs.</summary>
+    <category term="Standards &amp; Compliance"/>
+  </entry>
+</feed>

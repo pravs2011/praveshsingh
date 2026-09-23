@@ -7,6 +7,8 @@
 
 Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. With 15+ years of software architecture and hands-on engineering experience, he designs mission-critical clinical healthcare platforms, multi-tenant SaaS products, deterministic automation pipelines, and enterprise systems across public and private sectors.
 
+Verified facts: 15+ years engineering practice · iCare deployed across state hospital networks in Punjab and Madhya Pradesh · TaskEdge delivers sub-50ms task updates · extraction pipelines achieve >99.4% field-level precision · presenter at 4 state/national health events (2023–2025) · based in Mohali/Chandigarh, India (works globally, remote).
+
 ## Key Roles & Affiliations
 
 - **Managing Director & CTO**, SoftEdge Technology Solutions (https://softedgetechnology.com)
@@ -53,12 +55,30 @@ Full commercial transparency & inquiry generator: https://praveshsingh.com/exper
 
 Pravesh Singh authors in-depth, production-grounded engineering guides on systems architecture:
 - **Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Atom feed (full summaries):** https://praveshsingh.com/writing/feed.xml
 - **Offline-Tolerant Hospital Software:** https://praveshsingh.com/writing/offline-tolerant-hospital-software.html (Engineering clinical software for intermittent power and high-latency hospital counters).
 - **ABDM Integration Developer Guide:** https://praveshsingh.com/writing/abdm-integration-developer-guide.html (A pragmatic engineering walkthrough of ABHA, HIP/HIU, FHIR R4 JSON, and ECDH encryption).
 - **Multi-Tenant PostgreSQL Isolation:** https://praveshsingh.com/writing/multi-tenant-postgresql-isolation.html (Schema-per-Tenant vs Shared-Schema RLS, connection pooling with PgBouncer, and performance benchmarks).
 - **Double-Entry Medicine Inventory Ledgers:** https://praveshsingh.com/writing/high-value-medicine-inventory-logistics.html (Applying immutable financial ledger accounting to biological pharmaceuticals).
 - **Structured Data Extraction with LLMs:** https://praveshsingh.com/writing/structured-data-extraction-llm-limits.html (Schema-constrained decoding, Pydantic validation loops, and invoice parsing).
 - **DPDP Act 2023 HealthTech Architecture:** https://praveshsingh.com/writing/dpdp-act-2023-health-tech-checklist.html (10-point engineering checklist for consent management, erasure, and audit logging).
+
+## Speaking & Public Demonstrations
+
+Pravesh Singh has delivered four invited health-tech presentations (2023–2025):
+
+1. **National Hemophilia Consensus Meeting** (Bhopal, May 22, 2025) — live multi-hospital iCare demonstration before medical college deans and state health mission directors.
+2. **NHM Punjab Capacity Building Workshop on Hemophilia Treatment** (Chandigarh, November 27, 2024) — presented with Chief Guest Sh. Ghanshyam Thori, IAS (Mission Director, NHM Punjab); recognized by the State Blood Services Programme.
+3. **Hemophilia & Thalassemia Summit 2023** (Guru Gobind Singh Medical College, Faridkot, November 7–8, 2023) — speaker & guest of honour.
+4. **PSACS & NACO Digital Staff Training** (Chandigarh, July 30, 2025) — hands-on training on digital patient intake and ABDM data formats.
+
+- **Speaking page (photos & details):** https://praveshsingh.com/speaking.html
+
+## Glossary
+
+Plain-language engineering definitions for Indian health-tech (ABDM milestones, ABHA, HIP vs HIU, FHIR R4, care context, consent artifact, FEFO, cold chain, Row-Level Security, schema-per-tenant, DPDP Act 2023, data fiduciary, double-entry inventory ledgers, offline-tolerant architecture):
+
+- **Glossary:** https://praveshsingh.com/glossary.html
 
 ## Site Structure & Navigation
 
@@ -69,7 +89,14 @@ Pravesh Singh authors in-depth, production-grounded engineering guides on system
 - **AI Solutions:** https://praveshsingh.com/automation.html
 - **Industries & Domain Expertise:** https://praveshsingh.com/industries.html
 - **Commercial Expertise & Engagements:** https://praveshsingh.com/expertise.html
+- **Commercial Expertise (Markdown twin):** https://praveshsingh.com/expertise.md
+- **Speaking & Workshops:** https://praveshsingh.com/speaking.html
+- **Company (SoftEdge Technology Solutions):** https://praveshsingh.com/company.html
+- **Glossary:** https://praveshsingh.com/glossary.html
 - **Technical Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Writing Atom Feed:** https://praveshsingh.com/writing/feed.xml
+- **Sitemap:** https://praveshsingh.com/sitemap.xml
+- **Full machine context:** https://praveshsingh.com/llms-full.txt
 
 ## Public Presentations & Workshops
 

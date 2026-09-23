@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found (404) – Pravesh Singh</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#090b10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #090b10;
+      --bg-surface: #10141d;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --text: #f0f3f8;
+      --text-muted: #9aa3b5;
+      --text-sub: #6f788b;
+      --primary: #6366f1;
+      --teal: #0ea5e9;
+      --radius-md: 14px;
+      --transition: 0.2s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    a { color: inherit; text-decoration: none; transition: var(--transition); }
+    .wrap { width: min(560px, 100%); text-align: center; }
+    .code {
+      font-size: clamp(4.5rem, 14vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--primary);
+      line-height: 1;
+    }
+    h1 { font-size: 1.5rem; font-weight: 700; color: #ffffff; margin: 18px 0 10px; letter-spacing: -0.02em; }
+    .sub { color: var(--text-muted); font-size: 1rem; margin-bottom: 34px; }
+    .links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+    .links a {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+    .links a:hover { border-color: var(--border-hover); color: #ffffff; background: rgba(255,255,255,0.04); }
+    .links a span { display: block; font-size: 0.76rem; color: var(--text-sub); margin-top: 2px; }
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: linear-gradient(135deg, #4f46e5, #4338ca);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(79, 70, 229, 0.35);
+    }
+    .home-btn:hover { background: linear-gradient(135deg, #6366f1, #4f46e5); transform: translateY(-1px); }
+    .foot { margin-top: 34px; font-size: 0.8rem; color: var(--text-sub); }
+    .foot a { color: var(--teal); }
+    @media (max-width: 480px) { .links { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="code">404</div>
+    <h1>Page not found</h1>
+    <p class="sub">The page you're looking for doesn't exist or has moved. Try one of these instead:</p>
+    <nav class="links" aria-label="Recovery links">
+      <a href="/">Pravesh Singh<span>Home &amp; platform overview</span></a>
+      <a href="/icare.html">iCare<span>Clinical registry &amp; cold-chain logistics</span></a>
+      <a href="/taskedge.html">TaskEdge<span>Multi-tenant operations SaaS</span></a>
+      <a href="/expertise.html">Expertise<span>Engagement packages &amp; advisory</span></a>
+      <a href="/writing/index.html">Writing<span>Engineering essays &amp; guides</span></a>
+      <a href="/about.html">About<span>Founder story &amp; approach</span></a>
+    </nav>
+    <a href="/" class="home-btn">Back to homepage →</a>
+    <p class="foot">Machine-readable site index: <a href="/llms.txt">llms.txt</a> · <a href="/sitemap.xml">sitemap.xml</a></p>
+  </main>
+</body>
+</html>
