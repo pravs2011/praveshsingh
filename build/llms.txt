@@ -15,13 +15,14 @@ Verified facts: 15+ years engineering practice · iCare deployed across state ho
 - **Software Architect & Creator**, iCare (Digital Clinical Registry & Biological Cold-Chain Inventory Platform)
 - **Software Architect & Creator**, TaskEdge (Multi-Tenant Operations Task Management SaaS)
 - **Direct Technical Advisor & Fractional CTO** on healthcare integrations, database architecture, and compliance.
+- **Regions Served:** India (Mohali/Chandigarh HQ), United States, United Kingdom and Europe — remote delivery with US Eastern and CET/GMT overlap windows.
 
 ## Capability Pillars
 
 1. **Mission-Critical Healthcare Platforms:** Specialized in Ayushman Bharat Digital Mission (ABDM M1/M2/M3) integrations, HL7 FHIR R4 interoperability, offline-tolerant clinical hospital systems, and cold-chain medicine inventory ledgers.
 2. **Multi-Tenant SaaS Engineering:** PostgreSQL Row-Level Security (RLS) isolation, high-concurrency API performance, tenant-aware database sharding, audit-ready compliance trails, and enterprise role-based access control (RBAC).
 3. **Deterministic Applied AI & Data Extraction:** Moving beyond prompt engineering through schema-constrained LLM generation (JSON Schema / Pydantic), mathematical invariant validation, citation anchoring, and automated ETL pipelines.
-4. **Fractional CTO & Architecture Advisory:** Technology due diligence, code & security audits, modernization roadmaps, database query optimization, and DPDP Act 2023 compliance consulting.
+4. **Fractional CTO & Architecture Advisory:** Technology due diligence, code & security audits, modernization roadmaps, database query optimization, DPDP Act 2023 compliance consulting, GDPR-conscious and HIPAA-aware engineering for US and EU clients, and senior AI development consulting (LLM document extraction).
 
 ## Primary Software Systems
 

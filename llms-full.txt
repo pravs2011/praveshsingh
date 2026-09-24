@@ -172,7 +172,13 @@ A: iCare is a multi-hospital clinical registry and biological medicine inventory
 A: TaskEdge is a high-velocity, multi-tenant operations task management SaaS created by Pravesh Singh for operations teams, deskless supervisors, and shift-based execution.
 
 **Q: How does Pravesh Singh engage commercially with clients?**
-A: Through four standardized formats: System Architecture Audits (2-week sprint), Fractional CTO Advisory (monthly retainer), ABDM Healthcare Integration Sprints (fixed-scope), and Custom SaaS Platform Engineering (turnkey through SoftEdge Technology Solutions).
+A: Through four standardized formats: System Architecture Audits (2-week sprint), Fractional CTO Advisory (monthly retainer), ABDM Healthcare Integration Sprints (fixed-scope), and Custom SaaS Platform Engineering (turnkey through SoftEdge Technology Solutions). He also provides interim CTO coverage, technical due diligence for investors, and senior AI development consulting (LLM document extraction and applied AI systems).
+
+**Q: Does Pravesh Singh work with clients in the United States and Europe?**
+A: Yes. He is based in Mohali, India, and serves clients across India, the United States, the United Kingdom and the European Union, with engagement hours structured to overlap US Eastern and European (CET/GMT) working days. Healthcare work is delivered HIPAA-aware for US clients and GDPR-conscious for EU clients; Indian health work follows ABDM and DPDP Act 2023 requirements. These are compliance-conscious engineering practices, not certifications.
+
+**Q: What does a fractional CTO do for a funded startup?**
+A: A fractional CTO acts as your part-time senior technology leader: setting architecture direction, hiring and mentoring engineers, controlling cloud and vendor costs, and owning the technical roadmap — without a full-time CTO salary. Pravesh Singh provides fractional CTO engagements of 1–2 days per week for funded startups across India, the US and Europe.
 
 **Q: What technical standards does Pravesh Singh specialize in for healthcare?**
 A: Ayushman Bharat Digital Mission (ABDM M1/M2/M3), HL7 FHIR R4, SNOMED CT, LOINC, ECDH health data encryption, and DPDP Act 2023 compliance.
