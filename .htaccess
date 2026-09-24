@@ -81,7 +81,7 @@ ErrorDocument 404 /404.html
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
   # CSP in report-only mode first — tighten after reviewing reports
-  Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-src https://www.googletagmanager.com; base-uri 'self'; form-action 'self'"
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://www.googletagmanager.com; base-uri 'self'; form-action 'self'"
 
   # Keep /build/ out of indexes even if the rewrite is bypassed
   <If "%{REQUEST_URI} -strmatch '/build*'">

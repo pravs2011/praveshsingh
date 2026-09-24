@@ -93,6 +93,7 @@ Plain-language engineering definitions for Indian health-tech (ABDM milestones, 
 - **Speaking & Workshops:** https://praveshsingh.com/speaking.html
 - **Company (SoftEdge Technology Solutions):** https://praveshsingh.com/company.html
 - **Glossary:** https://praveshsingh.com/glossary.html
+- **Privacy & Cookie Policy:** https://praveshsingh.com/privacy.html
 - **Technical Writing Hub:** https://praveshsingh.com/writing/
 - **Writing Atom Feed:** https://praveshsingh.com/writing/feed.xml
 - **Sitemap:** https://praveshsingh.com/sitemap.xml

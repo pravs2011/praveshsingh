@@ -34,12 +34,16 @@ say "==> Copying deploy files ..."
 # Root pages
 for f in index.html about.html icare.html taskedge.html automation.html \
          industries.html expertise.html speaking.html glossary.html company.html \
-         404.html \
+         privacy.html 404.html \
          .htaccess robots.txt sitemap.xml llms.txt llms-full.txt \
          expertise.md 8f4a2c19e7b34d5680f1ae92c7b5d316.txt \
          yandex_489999cb20aa0fec.html; do
   cp "$f" "$BUILD/"
 done
+
+# Consent engine
+mkdir -p "$BUILD/js"
+cp js/consent.js "$BUILD/js/consent.js"
 
 # Writing section
 cp writing/index.html \
@@ -66,11 +70,27 @@ say "==> Validating build ..."
 # 1. Required files exist
 for f in index.html about.html icare.html taskedge.html automation.html \
          industries.html expertise.html speaking.html glossary.html company.html \
-         404.html .htaccess robots.txt sitemap.xml llms.txt llms-full.txt \
-         expertise.md writing/index.html writing/feed.xml \
+         privacy.html 404.html js/consent.js .htaccess robots.txt sitemap.xml \
+         llms.txt llms-full.txt expertise.md writing/index.html writing/feed.xml \
          .well-known/security.txt images/pravesh-singh.png; do
   [ -f "$BUILD/$f" ] || fail "missing required file: $f"
 done
+
+# 1b. Every real HTML page ships the consent engine + consent default +
+#     footer privacy links. Noindex redirect stubs (http-equiv=refresh) and
+#     the yandex verification file load nothing and are excluded; 404.html
+#     has no footer, so only the engine checks apply there.
+while IFS= read -r -d '' f; do
+  grep -q '/js/consent.js' "$f" || fail "missing consent.js include: $f"
+  grep -q "gtag('consent', 'default'" "$f" || fail "missing consent default: $f"
+  if [ "$f" != "$BUILD/404.html" ]; then
+    grep -q 'href="privacy.html"\|href="../privacy.html"' "$f" \
+      || fail "missing footer privacy links: $f"
+  fi
+done < <(find "$BUILD" -name '*.html' \
+  ! -name '_template.html' \
+  ! -name 'yandex_*.html' \
+  ! -exec grep -q 'http-equiv="refresh"' {} \; -print0)
 
 # 2. Nothing that must never ship
 leak=$(find "$BUILD" \( -name '_template.html' -o -name 'make_page.sh' \

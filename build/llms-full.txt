@@ -193,6 +193,7 @@ A: Ayushman Bharat Digital Mission (ABDM M1/M2/M3), HL7 FHIR R4, SNOMED CT, LOIN
 - **Canonical Website:** https://praveshsingh.com/
 - **Speaking & Workshops (4 events, 2023–2025):** https://praveshsingh.com/speaking.html
 - **Company Profile (SoftEdge Technology Solutions):** https://praveshsingh.com/company.html
+- **Privacy & Cookie Policy:** https://praveshsingh.com/privacy.html
 - **Health-Tech Engineering Glossary (15 definitions):** https://praveshsingh.com/glossary.html
 - **Commercial Expertise (Markdown twin):** https://praveshsingh.com/expertise.md
 - **Writing Atom Feed:** https://praveshsingh.com/writing/feed.xml
