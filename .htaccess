@@ -20,30 +20,40 @@ DirectoryIndex index.html
   RewriteCond %{HTTP_HOST} ^www\.praveshsingh\.com$ [NC]
   RewriteRule ^(.*)$ https://praveshsingh.com/$1 [R=301,L]
 
-  # 2. Canonicalize /index.html -> /
-  # Fixes GSC "Alternative page with proper canonical tag"
+  # 2. Canonicalize root /index.html -> /
+  # Prevents GSC "Page with redirect" on /index.html (Google discovers it separately)
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html(?:\?[^\\ ]*)?\ HTTP/ [NC]
   RewriteRule ^index\.html$ https://praveshsingh.com/ [R=301,L]
 
-  # 3. Redirect direct directory requests to homepage (prevents 403 Forbidden)
+  # 3. Canonicalize /writing/index.html -> /writing/
+  # Prevents duplicate content between /writing/ and /writing/index.html
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /writing/index\.html(?:\?[^\\ ]*)?\ HTTP/ [NC]
+  RewriteRule ^writing/index\.html$ https://praveshsingh.com/writing/ [R=301,L]
+
+  # 4. Hard-block the local build mirror BEFORE any other rule.
+  # Returns 404 (not 403) so GSC treats it as a normal absent URL —
+  # a 403 creates a "Blocked due to access forbidden (403)" coverage issue.
+  RewriteRule ^build(/.*)?$ - [R=404,L]
+
+  # 5. Redirect direct directory requests that lack index files to homepage
+  # Prevents 403 Forbidden from Options -Indexes (e.g. /images/subdir/)
+  # IMPORTANT: Exclude root / to prevent infinite redirect loop on homepage
   RewriteCond %{REQUEST_FILENAME} -d
-  RewriteCond %{REQUEST_URI} ^/(images|images/.*|\.well-known)/?$ [NC]
+  RewriteCond %{REQUEST_URI} !^/$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(writing|\.well-known)/?$ [NC]
   RewriteRule ^ https://praveshsingh.com/ [R=301,L]
 
-  # 4. Canonicalize /writing -> /writing/ (single canonical form for the hub)
+  # 6. Canonicalize /writing -> /writing/ (single canonical form for the hub)
   RewriteRule ^writing$ https://praveshsingh.com/writing/ [R=301,L]
 
-  # 5. Hard-block the local build mirror (never expose /build/ publicly)
-  RewriteRule ^build(/.*)?$ - [R=404,L]
 </IfModule>
 
 # Block /build/ at the access level too (defence in depth)
 <FilesMatch "^(?i)\.htaccess$">
   Require all denied
 </FilesMatch>
-<If "%{REQUEST_URI} -strmatch '/build*'">
-  Require all denied
-</If>
+# NOTE: /build/ returns 404 via mod_rewrite above. Do NOT use "Require all denied"
+# here — Apache issues 403 for it, which GSC reports as a coverage error.
 
 # Real 404 handler (returns HTTP 404 + noindex page — no more soft 404s)
 ErrorDocument 404 /404.html
@@ -75,7 +85,7 @@ ErrorDocument 404 /404.html
 
   # Keep /build/ out of indexes even if the rewrite is bypassed
   <If "%{REQUEST_URI} -strmatch '/build*'">
-    Header set X-Robots-Tag "noindex, nofollow"
+    Header always set X-Robots-Tag "noindex, nofollow"
   </If>
 
   # Ensure robots.txt, sitemap.xml, llms.txt are accessible to all AI/Search bots
