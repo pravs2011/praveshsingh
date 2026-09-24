@@ -970,7 +970,7 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    .footer-links { display: flex; gap: 20px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 14px 20px; }
     .footer-links a:hover { color: #ffffff; }
 
     /* Toast */
@@ -1013,12 +1013,18 @@
     }
 
     @media (max-width: 720px) {
+      .entity-box { grid-template-columns: 1fr; }
+      .proof-grid { grid-template-columns: 1fr; }
       .skills-layout { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr; }
       .hero-title { font-size: 2.3rem; }
       .inquiry-generator { padding: 30px 20px; }
       .portrait-card picture, .portrait-card img { height: 380px; }
       .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 720px) {
+      .footer-links a { display: inline-block; padding: 10px 0; }
     }
   </style>
   <!-- Cookie consent & consent-gated analytics — see /privacy.html -->
@@ -1180,56 +1186,58 @@
       </nav>
     </div>
 
-    <div class="mobile-drawer" id="mobileMenu" aria-hidden="true">
-      <div class="mobile-drawer-section">
-        <div class="mobile-drawer-label">Platform Overview</div>
-        <a href="about.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">👤</span>
-          <span>About Pravesh</span>
-        </a>
-        <a href="expertise.html" class="mobile-drawer-link active" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">💼</span>
-          <span>Technical Expertise &amp; Advisory</span>
-        </a>
-        <a href="writing/" class="mobile-drawer-link" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">📝</span>
-          <span>Engineering Essays &amp; Writing</span>
-        </a>
-        <a href="index.html#events" class="mobile-drawer-link" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">🎤</span>
-          <span>Keynotes &amp; Workshops</span>
-        </a>
-      </div>
-
-      <div class="mobile-drawer-section">
-        <div class="mobile-drawer-label">Flagship Systems</div>
-        <a href="icare.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">🏥</span>
-          <span>iCare Healthcare Platform</span>
-        </a>
-        <a href="taskedge.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">⚡</span>
-          <span>TaskEdge Operations SaaS</span>
-        </a>
-        <a href="automation.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">🤖</span>
-          <span>AI &amp; Document Automation</span>
-        </a>
-        <a href="industries.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
-          <span class="mobile-drawer-icon">🌐</span>
-          <span>Industry Footprint</span>
-        </a>
-      </div>
-
-      <div class="mobile-drawer-actions">
-        <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener noreferrer" class="mobile-linkedin-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          <span>Connect on LinkedIn</span>
-        </a>
-        <a href="#inquiry" class="btn-nav-cta" style="justify-content:center; padding:12px;" onclick="closeMobileMenu()">Start a Project</a>
-      </div>
-    </div>
   </header>
+
+<!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-drawer-section">
+      <div class="mobile-drawer-label">Platform Overview</div>
+      <a href="about.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">👤</span>
+        <span>About Pravesh</span>
+      </a>
+      <a href="expertise.html" class="mobile-drawer-link active" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">💼</span>
+        <span>Technical Expertise &amp; Advisory</span>
+      </a>
+      <a href="writing/" class="mobile-drawer-link" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">📝</span>
+        <span>Engineering Essays &amp; Writing</span>
+      </a>
+      <a href="index.html#events" class="mobile-drawer-link" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">🎤</span>
+        <span>Keynotes &amp; Workshops</span>
+      </a>
+    </div>
+
+    <div class="mobile-drawer-section">
+      <div class="mobile-drawer-label">Flagship Systems</div>
+      <a href="icare.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">🏥</span>
+        <span>iCare Healthcare Platform</span>
+      </a>
+      <a href="taskedge.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">⚡</span>
+        <span>TaskEdge Operations SaaS</span>
+      </a>
+      <a href="automation.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">🤖</span>
+        <span>AI &amp; Document Automation</span>
+      </a>
+      <a href="industries.html" class="mobile-drawer-link" onclick="closeMobileMenu()">
+        <span class="mobile-drawer-icon">🌐</span>
+        <span>Industry Footprint</span>
+      </a>
+    </div>
+
+    <div class="mobile-drawer-actions">
+      <a href="https://www.linkedin.com/in/praveshsingh/" target="_blank" rel="noopener noreferrer" class="mobile-linkedin-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        <span>Connect on LinkedIn</span>
+      </a>
+      <a href="#inquiry" class="btn-nav-cta" style="justify-content:center; padding:12px;" onclick="closeMobileMenu()">Start a Project</a>
+    </div>
+  </div>
 
   <main>
     <!-- =========================================================
@@ -1667,7 +1675,7 @@
           </div>
 
           <form id="inquiryForm" onsubmit="handleInquirySubmit(event)">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
               <div class="form-group">
                 <label class="form-label" for="senderName">Your Name *</label>
                 <input class="form-input" type="text" id="senderName" required placeholder="e.g. Rahul Sharma">
@@ -1689,7 +1697,7 @@
               </select>
             </div>
 
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
               <div class="form-group">
                 <label class="form-label" for="timelineInput">Target Timeline</label>
                 <input class="form-input" type="text" id="timelineInput" placeholder="e.g. Immediate / Next 30 days">

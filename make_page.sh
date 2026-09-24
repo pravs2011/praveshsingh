@@ -588,20 +588,24 @@ cat << 'HEADER' > "$OUT"
       </nav>
     </div>
 
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <a href="/" class="nav-link" onclick="closeMobileMenu()">Home</a>
-      <a href="about.html" class="nav-link__ABOUT_CLASS__" onclick="closeMobileMenu()">About Pravesh</a>
-      <a href="/#software" class="nav-link" onclick="closeMobileMenu()">Products & Systems</a>
-      <a href="icare.html" class="nav-link__ICARE_CLASS__" onclick="closeMobileMenu()" style="padding-left:24px; font-size:0.85rem; color:var(--text-sub);">↳ iCare Case Study</a>
-      <a href="taskedge.html" class="nav-link__TASKEDGE_CLASS__" onclick="closeMobileMenu()" style="padding-left:24px; font-size:0.85rem; color:var(--text-sub);">↳ TaskEdge SaaS</a>
-      <a href="automation.html" class="nav-link__AUTOMATION_CLASS__" onclick="closeMobileMenu()">AI Solutions</a>
-      <a href="industries.html" class="nav-link__INDUSTRIES_CLASS__" onclick="closeMobileMenu()">Industries</a>
-      <a href="/#events" class="nav-link" onclick="closeMobileMenu()">Talks & Workshops</a>
-      <a href="expertise.html" class="nav-link" onclick="closeMobileMenu()">Technical Expertise</a>
-      <a href="writing/" class="nav-link" onclick="closeMobileMenu()">Writing & Insights</a>
-      <a href="/#contact" class="btn btn-primary" style="margin-top:10px;" onclick="closeMobileMenu()">Get in touch</a>
-    </div>
   </header>
+
+  <!-- Mobile Drawer: must stay OUTSIDE <header> — the header's backdrop-filter
+       creates a containing block that clamps position:fixed descendants to the
+       72px header box, hiding the drawer behind page content. -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/" class="nav-link" onclick="closeMobileMenu()">Home</a>
+    <a href="about.html" class="nav-link__ABOUT_CLASS__" onclick="closeMobileMenu()">About Pravesh</a>
+    <a href="/#software" class="nav-link" onclick="closeMobileMenu()">Products & Systems</a>
+    <a href="icare.html" class="nav-link__ICARE_CLASS__" onclick="closeMobileMenu()" style="padding-left:24px; font-size:0.85rem; color:var(--text-sub);">↳ iCare Case Study</a>
+    <a href="taskedge.html" class="nav-link__TASKEDGE_CLASS__" onclick="closeMobileMenu()" style="padding-left:24px; font-size:0.85rem; color:var(--text-sub);">↳ TaskEdge SaaS</a>
+    <a href="automation.html" class="nav-link__AUTOMATION_CLASS__" onclick="closeMobileMenu()">AI Solutions</a>
+    <a href="industries.html" class="nav-link__INDUSTRIES_CLASS__" onclick="closeMobileMenu()">Industries</a>
+    <a href="/#events" class="nav-link" onclick="closeMobileMenu()">Talks & Workshops</a>
+    <a href="expertise.html" class="nav-link" onclick="closeMobileMenu()">Technical Expertise</a>
+    <a href="writing/" class="nav-link" onclick="closeMobileMenu()">Writing & Insights</a>
+    <a href="/#contact" class="btn btn-primary" style="margin-top:10px;" onclick="closeMobileMenu()">Get in touch</a>
+  </div>
 
 __BODY__
 

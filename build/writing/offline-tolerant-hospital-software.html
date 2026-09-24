@@ -451,7 +451,7 @@
 
     .article-header { padding: 64px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
     .crumb { font-size: 0.82rem; color: var(--text-sub); margin-bottom: 20px; }
-    .crumb a { color: var(--text-muted); }
+    .crumb a { color: var(--text-muted); display: inline-block; padding: 10px 2px; }
     .crumb a:hover { color: #ffffff; }
 
     .tag-badge {
@@ -510,6 +510,7 @@
       border-radius: var(--radius-sm);
       padding: 20px;
       overflow-x: auto;
+      max-width: 100%;
       margin: 28px 0;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 0.9rem;
@@ -522,6 +523,7 @@
       background: rgba(255, 255, 255, 0.08);
       padding: 2px 6px;
       border-radius: 4px;
+      overflow-wrap: anywhere;
       color: #93c5fd;
     }
     pre code { background: none; padding: 0; color: inherit; }
@@ -627,7 +629,7 @@
 
     footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--text-muted); font-size: 0.86rem; }
     .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-    .footer-links { display: flex; gap: 20px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 14px 20px; }
     .footer-links a:hover { color: #ffffff; }
 
     @media (max-width: 1080px) {
@@ -639,6 +641,10 @@
       .article-title { font-size: 2.1rem; }
       .footer-row { flex-direction: column; align-items: flex-start; }
       .btn-nav-cta { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .footer-links a { display: inline-block; padding: 10px 0; }
     }
   </style>
   <!-- Cookie consent & consent-gated analytics — see /privacy.html -->
@@ -796,7 +802,7 @@
         </div>
       </nav>
     </div>
-
+  </header>
     <!-- Mobile Drawer -->
     <div class="mobile-drawer" id="mobileMenu" aria-hidden="true">
       <div class="mobile-drawer-section">
@@ -847,7 +853,6 @@
         <a href="../expertise.html#inquiry" class="btn-nav-cta" style="justify-content:center; padding:12px;" onclick="closeMobileMenu()">Start a Project</a>
       </div>
     </div>
-  </header>
 
   <main>
     <div class="container">

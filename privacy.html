@@ -79,7 +79,10 @@
     .nav-links { display: flex; gap: 4px; }
     .nav-link { padding: 8px 14px; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
     .nav-link:hover, .nav-link.active { color: #fff; background: rgba(255,255,255,0.05); }
-    @media (max-width: 820px) { .nav-links { display: none; } }
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+    }
 
     .page-hero { padding: 64px 0 40px; border-bottom: 1px solid var(--border); }
     .eyebrow { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #818cf8; margin-bottom: 12px; }
@@ -125,10 +128,62 @@
     .note { border: 1px solid var(--border); border-left: 3px solid var(--teal); background: rgba(14,165,233,0.06); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 14px 18px; margin: 16px 0; font-size: 0.92rem; color: #b7c0d2; }
     .note strong { color: #e2e8f0; }
 
+    .cookie-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .cookie-table { min-width: 640px; }
+
     footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--text-muted); font-size: 0.86rem; margin-top: 32px; }
     .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
     .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-links a:hover { color: #fff; }
+    /* Mobile navigation drawer */
+    .nav-burger {
+      display: none;
+      width: 44px; height: 44px;
+      padding: 11px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1100;
+    }
+    .nav-burger span { display: block; width: 20px; height: 2px; background: #e2e8f0; border-radius: 2px; transition: all 0.25s cubic-bezier(0.16,1,0.3,1); }
+    .nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0; bottom: 0;
+      background: rgba(9,11,16,0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid var(--border);
+      padding: 24px 20px 48px;
+      overflow-y: auto;
+      z-index: 999;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer-link {
+      display: flex; align-items: center;
+      padding: 14px 12px;
+      border-radius: 8px;
+      color: #e2e8f0; font-size: 1rem; font-weight: 500;
+      text-decoration: none;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-drawer-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+    @media (max-width: 820px) { .nav-burger { display: flex; } }
+
+    @media (max-width: 720px) {
+      .footer-links a { display: inline-block; padding: 10px 0; }
+    }
   </style>
   <!-- Cookie consent & consent-gated analytics — see /privacy.html -->
   <script src="/js/consent.js" defer></script>
@@ -169,9 +224,21 @@
           <a href="speaking.html" class="nav-link">Speaking</a>
           <a href="glossary.html" class="nav-link">Glossary</a>
         </div>
+      <button class="nav-burger" id="navBurger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
       </nav>
     </div>
   </header>
+
+  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+      <a href="about.html" class="nav-drawer-link">About</a>
+      <a href="icare.html" class="nav-drawer-link">iCare</a>
+      <a href="expertise.html" class="nav-drawer-link">Expertise</a>
+      <a href="writing/" class="nav-drawer-link">Writing</a>
+      <a href="speaking.html" class="nav-drawer-link">Speaking</a>
+      <a href="glossary.html" class="nav-drawer-link">Glossary</a>
+  </div>
 
   <main>
     <div class="container page-hero">
@@ -223,6 +290,7 @@
         <h2 id="cookies">3. Cookies &amp; local storage used</h2>
         <p>Before you make a choice, the only thing stored is <em>nothing</em> — the consent prompt itself uses no cookies. After you choose:</p>
 
+        <div class="cookie-scroll">
         <table class="cookie-table">
           <thead>
             <tr>
@@ -253,6 +321,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
 
         <div class="note"><strong>No consent yet?</strong> The <code>_ga</code> cookies above are not set at all until you accept analytics in the <button type="button" data-consent-settings style="background:none;border:none;color:#93c5fd;cursor:pointer;padding:0;font:inherit;text-decoration:underline;">cookie settings</button> or the banner.</div>
 
@@ -333,5 +402,27 @@
       </div>
     </div>
   </footer>
+  <script>
+    (function () {
+      var burger = document.getElementById('navBurger');
+      var drawer = document.getElementById('navDrawer');
+      if (!burger || !drawer) return;
+      function close() {
+        burger.setAttribute('aria-expanded', 'false');
+        drawer.classList.remove('open');
+        drawer.setAttribute('aria-hidden', 'true');
+      }
+      burger.addEventListener('click', function () {
+        var open = burger.getAttribute('aria-expanded') === 'true';
+        burger.setAttribute('aria-expanded', String(!open));
+        drawer.classList.toggle('open', !open);
+        drawer.setAttribute('aria-hidden', String(open));
+      });
+      drawer.addEventListener('click', function (e) {
+        if (e.target instanceof Element && e.target.closest('a')) close();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    })();
+  </script>
 </body>
 </html>
