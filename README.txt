@@ -1,16 +1,39 @@
 # praveshsingh.com — Executive Founder & CTO Platform Package
 
-Upload these files and directories to the web root of praveshsingh.com:
+## Building for production
 
-- .htaccess (Crucial: Apache canonical 301 redirects, 403 elimination & MIME types)
+Run:
+
+    ./make_build.sh --zip
+
+This assembles a validated production build in build/ and packages it as
+praveshsingh-production.zip (3.8 MB, 77 files). The script wipes the old
+build/, copies only deployable files, then validates: required files present,
+no dev artifacts (templates, generator, planning docs), canonical href
+hygiene, sitemap↔file consistency, and XML well-formedness. It exits non-zero
+on any failure — do not deploy a failed build.
+
+Deploy: upload the CONTENTS of the zip (or of build/) to the web root.
+Delete any stale build/ directory on the server first. Never upload the
+dev-repo root as-is: that is how build/ (with planning docs) leaked into
+production and triggered the GSC "access forbidden (403)" coverage error.
+
+Files deployed:
+
+- .htaccess (Crucial: Apache canonical 301 redirects, /build/ 404-block, MIME types)
 - index.html (Unified Executive Positioning, Proof Strip, Hub-and-Spoke Architecture)
+- 404.html (Real 404 handler — served by ErrorDocument)
 - about.html (Executive Bio, Engineering Philosophy, Career Timeline, Media Proof)
 - icare.html (Clinical Registry & Biological Cold-Chain Logistics Deep-Dive)
 - taskedge.html (Multi-Tenant Operations Execution SaaS Deep-Dive)
 - automation.html (Deterministic Applied AI, Schema-Constrained Extraction & ETL)
 - industries.html (Healthcare, Deskless Ops, FinTech, Public Sector DPI Footprint)
+- speaking.html (Invited talks, workshops & live demonstrations)
+- glossary.html (Plain-language Indian health-tech glossary)
+- company.html (SoftEdge Technology Solutions company profile)
 - expertise.html (Commercial Engagement Packaging, 4 Standardized Formats & Inquiry Generator)
 - expertise.md (Markdown twin of expertise.html)
+- 404.html (Real 404 handler — served by ErrorDocument)
 - robots.txt (Full web and AI search crawler directives)
 - sitemap.xml (Comprehensive sitemap covering all 14 canonical platform URLs)
 - llms.txt (Concise machine-readable site index & executive context)
@@ -28,6 +51,12 @@ Upload these files and directories to the web root of praveshsingh.com:
   - showcase/ (Optimized proof & milestone photos)
 - writing/
   - index.html (Thought leadership hub & filterable essay catalog)
+  - feed.xml (Atom syndication feed)
+  - feed.xml (Atom syndication feed)
+
+Do NOT upload: build/ (local mirror), writing/_template.html (generator
+template), make_page.sh, *.md planning docs. The .htaccess 404-blocks /build/;
+uploading it would only add dead weight.
   - offline-tolerant-hospital-software.html
   - abdm-integration-developer-guide.html
   - multi-tenant-postgresql-isolation.html

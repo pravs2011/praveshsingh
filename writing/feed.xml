@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Pravesh Singh — Engineering Essays</title>
   <subtitle>Technical essays on healthcare software architecture, PostgreSQL multi-tenancy, ABDM integration, inventory ledgers, applied AI, and DPDP compliance by Pravesh Singh (Founder &amp; CTO, SoftEdge Technology Solutions).</subtitle>
-  <link href="https://praveshsingh.com/writing/index.html" rel="alternate" type="text/html"/>
+  <link href="https://praveshsingh.com/writing/" rel="alternate" type="text/html"/>
   <link href="https://praveshsingh.com/writing/feed.xml" rel="self" type="application/atom+xml"/>
   <id>https://praveshsingh.com/writing/</id>
   <updated>2026-09-23T00:00:00Z</updated>

@@ -112,7 +112,7 @@ Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Dir
 
 ## 6. Technical Thought Leadership Essays
 
-- **Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Writing Hub:** https://praveshsingh.com/writing/
 
 ### 6.1 Architecting Offline-Tolerant Software for Indian District Hospitals
 - **URL:** https://praveshsingh.com/writing/offline-tolerant-hospital-software.html
@@ -202,7 +202,7 @@ A: Ayushman Bharat Digital Mission (ABDM M1/M2/M3), HL7 FHIR R4, SNOMED CT, LOIN
 - **AI Solutions:** https://praveshsingh.com/automation.html
 - **Industries:** https://praveshsingh.com/industries.html
 - **Commercial Expertise:** https://praveshsingh.com/expertise.html
-- **Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Writing Hub:** https://praveshsingh.com/writing/
 - **Sitemap:** https://praveshsingh.com/sitemap.xml
 - **Robots Directives:** https://praveshsingh.com/robots.txt
 - **Security Policy:** https://praveshsingh.com/.well-known/security.txt

@@ -54,7 +54,7 @@ Full commercial transparency & inquiry generator: https://praveshsingh.com/exper
 ## Technical Writing & Architectural Essays
 
 Pravesh Singh authors in-depth, production-grounded engineering guides on systems architecture:
-- **Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Writing Hub:** https://praveshsingh.com/writing/
 - **Atom feed (full summaries):** https://praveshsingh.com/writing/feed.xml
 - **Offline-Tolerant Hospital Software:** https://praveshsingh.com/writing/offline-tolerant-hospital-software.html (Engineering clinical software for intermittent power and high-latency hospital counters).
 - **ABDM Integration Developer Guide:** https://praveshsingh.com/writing/abdm-integration-developer-guide.html (A pragmatic engineering walkthrough of ABHA, HIP/HIU, FHIR R4 JSON, and ECDH encryption).
@@ -93,7 +93,7 @@ Plain-language engineering definitions for Indian health-tech (ABDM milestones, 
 - **Speaking & Workshops:** https://praveshsingh.com/speaking.html
 - **Company (SoftEdge Technology Solutions):** https://praveshsingh.com/company.html
 - **Glossary:** https://praveshsingh.com/glossary.html
-- **Technical Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Technical Writing Hub:** https://praveshsingh.com/writing/
 - **Writing Atom Feed:** https://praveshsingh.com/writing/feed.xml
 - **Sitemap:** https://praveshsingh.com/sitemap.xml
 - **Full machine context:** https://praveshsingh.com/llms-full.txt

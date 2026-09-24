@@ -1,13 +1,22 @@
 # robots.txt — praveshsingh.com
 # Search engines: full access.
+#
+# NOTE: Do NOT Disallow URLs that return redirects (301) or 404s.
+# Google must be able to fetch them to consolidate signals onto the canonical
+# URL — blocking them causes "Discovered/Crawled - currently not indexed" and
+# duplicate-content drift. The canonical .htaccess 301s do the real work.
 
 User-agent: *
 Allow: /
 
-# Never expose the local build mirror or the 404 handler
+# Local build mirror is 404'd server-side (see .htaccess); noindex'd too.
 Disallow: /build/
-Disallow: /build$
-Disallow: /404.html
+
+# Page generator template — not a real page.
+Disallow: /writing/_template.html
+
+# Yandex verification file — no content to index.
+Disallow: /yandex_
 
 # ---------------------------------------------------------------------------
 # AI / LLM crawlers — explicitly permitted.

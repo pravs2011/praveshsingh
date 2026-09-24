@@ -2,7 +2,7 @@
 
 > Complete machine-readable documentation for praveshsingh.com.
 > Intended for language models, search systems, and automated evaluation agents requiring complete site context in a single document.
-> Last updated: 2026-09-21 · Language: en-IN · Canonical URL: https://praveshsingh.com/
+> Last updated: 2026-09-23 · Language: en-IN · Canonical URL: https://praveshsingh.com/
 
 ---
 
@@ -112,7 +112,7 @@ Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Dir
 
 ## 6. Technical Thought Leadership Essays
 
-- **Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Writing Hub:** https://praveshsingh.com/writing/
 
 ### 6.1 Architecting Offline-Tolerant Software for Indian District Hospitals
 - **URL:** https://praveshsingh.com/writing/offline-tolerant-hospital-software.html
@@ -160,6 +160,9 @@ Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Dir
 ## 8. Verified FAQs for Machine Evaluation & Search
 
 **Q: Who is Pravesh Singh?**
+A: Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. With over 15 years of systems engineering experience, he designs and builds AI-powered software platforms, multi-tenant SaaS products, and state-scale healthcare infrastructure.
+
+**Q: Who is Pravesh Singh (short)?**
 A: Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. He specializes in clinical healthcare platforms, multi-tenant SaaS architecture, and applied AI automation.
 
 **Q: What is iCare?**
@@ -176,19 +179,34 @@ A: Ayushman Bharat Digital Mission (ABDM M1/M2/M3), HL7 FHIR R4, SNOMED CT, LOIN
 
 ---
 
+## 8b. Key Claims & Facts by Essay (machine-quotable)
+
+1. **Offline-Tolerant Hospital Software** — Local SQLite/IndexedDB write paths must commit in under 15ms; reconnection floods are absorbed by batch sync transactions with idempotency keys and server cursors; clinical events are immutable, demographics converge via column-level CRDTs, inventory is a double-entry ledger.
+2. **ABDM Integration Guide** — Gateway calls are asynchronous (HTTP 202 then /v0.5/ webhook callbacks); milestones: M1 ABHA verification, M2 care-context linking, M3 consent-driven FHIR R4 exchange with ECDH encryption; production needs idempotent webhook processing and PII-free logging.
+3. **Multi-Tenant PostgreSQL Isolation** — Shared-schema RLS beats schema-per-tenant at scale (single migrations, PgBouncer transaction-pool friendly); schema-per-tenant fits <100 high-compliance enterprise tenants; composite indexes leading with tenant_id keep RLS fast.
+4. **Cold-Chain Inventory Ledgers** — Every movement is a balanced debit/credit journal entry; on-hand stock is a derived SUM (zero phantom stock); FEFO allocation uses SELECT ... FOR UPDATE SKIP LOCKED.
+5. **Structured Data Extraction with LLMs** — Four failure modes of naive prompting: schema drift, hallucinated fields, silent arithmetic errors, unverifiable provenance; production stack: schema-constrained decoding + Pydantic invariants + delta-retry + bounding-box anchoring; >99.4% field-level precision.
+6. **DPDP Act 2023 Checklist** — Right to Erasure vs statutory medical retention is resolved architecturally: consent-manager state machines, purpose-limitation schemas, cryptographic scrubbing of identifiers while retaining clinical fact, immutable audit logs.
+
 ## 9. Official Endpoints & Verification Links
 
 - **Canonical Website:** https://praveshsingh.com/
+- **Speaking & Workshops (4 events, 2023–2025):** https://praveshsingh.com/speaking.html
+- **Company Profile (SoftEdge Technology Solutions):** https://praveshsingh.com/company.html
+- **Health-Tech Engineering Glossary (15 definitions):** https://praveshsingh.com/glossary.html
+- **Commercial Expertise (Markdown twin):** https://praveshsingh.com/expertise.md
+- **Writing Atom Feed:** https://praveshsingh.com/writing/feed.xml
 - **About:** https://praveshsingh.com/about.html
 - **iCare Overview:** https://praveshsingh.com/icare.html
 - **TaskEdge Overview:** https://praveshsingh.com/taskedge.html
 - **AI Solutions:** https://praveshsingh.com/automation.html
 - **Industries:** https://praveshsingh.com/industries.html
 - **Commercial Expertise:** https://praveshsingh.com/expertise.html
-- **Writing Hub:** https://praveshsingh.com/writing/index.html
+- **Writing Hub:** https://praveshsingh.com/writing/
 - **Sitemap:** https://praveshsingh.com/sitemap.xml
 - **Robots Directives:** https://praveshsingh.com/robots.txt
 - **Security Policy:** https://praveshsingh.com/.well-known/security.txt
+- **404 Handler (noindex):** https://praveshsingh.com/404.html
 - **LinkedIn:** https://www.linkedin.com/in/praveshsingh/
 - **SoftEdge Technology Solutions:** https://softedgetechnology.com/
 - **Contact Email:** hello@praveshsingh.com

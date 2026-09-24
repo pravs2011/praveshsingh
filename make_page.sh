@@ -567,7 +567,7 @@ cat << 'HEADER' > "$OUT"
           <a href="automation.html" class="nav-link__AUTOMATION_CLASS__">AI Solutions</a>
           <a href="industries.html" class="nav-link__INDUSTRIES_CLASS__">Industries</a>
           <a href="expertise.html" class="nav-link">Expertise</a>
-          <a href="writing/index.html" class="nav-link">Writing</a>
+          <a href="writing/" class="nav-link">Writing</a>
         </div>
 
         <div class="nav-actions">
@@ -591,7 +591,7 @@ cat << 'HEADER' > "$OUT"
       <a href="industries.html" class="nav-link__INDUSTRIES_CLASS__" onclick="closeMobileMenu()">Industries</a>
       <a href="/#events" class="nav-link" onclick="closeMobileMenu()">Talks & Workshops</a>
       <a href="expertise.html" class="nav-link" onclick="closeMobileMenu()">Technical Expertise</a>
-      <a href="writing/index.html" class="nav-link" onclick="closeMobileMenu()">Writing & Insights</a>
+      <a href="writing/" class="nav-link" onclick="closeMobileMenu()">Writing & Insights</a>
       <a href="/#contact" class="btn btn-primary" style="margin-top:10px;" onclick="closeMobileMenu()">Get in touch</a>
     </div>
   </header>
@@ -616,8 +616,12 @@ __BODY__
           <a href="icare.html">iCare</a>
           <a href="taskedge.html">TaskEdge</a>
           <a href="automation.html">AI Solutions</a>
+          <a href="industries.html">Industries</a>
           <a href="expertise.html">Expertise</a>
-          <a href="writing/index.html">Writing</a>
+          <a href="writing/">Writing</a>
+          <a href="speaking.html">Speaking</a>
+          <a href="glossary.html">Glossary</a>
+          <a href="company.html">Company</a>
           <a href="/llms.txt" target="_blank" rel="noopener">llms.txt</a>
           <a href="#hero" style="color:var(--teal);">Back to top ↑</a>
         </div>

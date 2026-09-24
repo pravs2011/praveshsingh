@@ -1,2 +1,6 @@
 # graft's local graph cache — regenerable, not committed (run `graft build`).
 /graft/
+
+# Production build output — regenerable, not committed (run `./make_build.sh`).
+/build/
+.DS_Store
