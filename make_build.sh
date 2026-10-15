@@ -29,6 +29,10 @@ say "==> Cleaning $BUILD/ ..."
 rm -rf "$BUILD"
 mkdir -p "$BUILD/writing" "$BUILD/.well-known"
 
+# Refresh sitemap lastmod from git dates before the copy (FIX-6).
+say "==> Syncing sitemap lastmod from git dates ..."
+python3 tools/sync_lastmod.py sitemap.xml || fail "lastmod sync failed"
+
 say "==> Copying deploy files ..."
 
 # Root pages
@@ -60,6 +64,11 @@ cp writing/index.html \
 cp .well-known/security.txt .well-known/index.html "$BUILD/.well-known/"
 cp .well-known/llms.txt .well-known/llms-full.txt "$BUILD/.well-known/"
 cp -R images "$BUILD/images"
+
+# Essay markdown twins, if generated (FIX-7); tolerate absence.
+shopt -s nullglob
+cp writing/*.md "$BUILD/writing/" 2>/dev/null
+shopt -u nullglob
 
 # Strip OS junk
 find "$BUILD" -name '.DS_Store' -delete
@@ -94,7 +103,7 @@ done < <(find "$BUILD" -name '*.html' \
 
 # 2. Nothing that must never ship
 leak=$(find "$BUILD" \( -name '_template.html' -o -name 'make_page.sh' \
-        -o -name '*.md' ! -name 'expertise.md' -o -name '.DS_Store' \
+        -o -name '*.md' ! -name 'expertise.md' ! -path "$BUILD/writing/*" -o -name '.DS_Store' \
         -o -path "$BUILD/build*" -o -name 'CLAUDE*' -o -name 'CHATGPT*' \
         -o -name 'IMPROVEMENTS*' -o -name 'WEBSITE_*' -o -name 'LLM_VIS*' \
         -o -name 'GTAG*' -o -name 'ANALYTICS*' -o -name 'README.txt' \) -print)

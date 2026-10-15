@@ -1,17 +1,17 @@
 # Pravesh Singh
 
 > Official machine-readable context and site index for praveshsingh.com.
-> Last updated: 2026-09-21 · Language: en-IN
+> Last updated: 2026-10-15 · Language: en-IN
 
 ## Identity & Executive Positioning
 
-Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. With 15+ years of software architecture and hands-on engineering experience, he designs mission-critical clinical healthcare platforms, multi-tenant SaaS products, deterministic automation pipelines, and enterprise systems across public and private sectors.
+Pravesh Singh is the Founder and Chief Technology Officer (CTO) of SoftEdge Technology Solutions — a fractional CTO, senior AI developer & healthcare software architect. He builds AI-powered platforms, multi-tenant SaaS and HIPAA-aware, GDPR-conscious health systems for clients in India, the US and Europe.
 
 Verified facts: 15+ years engineering practice · iCare deployed across state hospital networks in Punjab and Madhya Pradesh · TaskEdge delivers sub-50ms task updates · extraction pipelines achieve >99.4% field-level precision · presenter at 4 state/national health events (2023–2025) · based in Mohali/Chandigarh, India (works globally, remote).
 
 ## Key Roles & Affiliations
 
-- **Managing Director & CTO**, SoftEdge Technology Solutions (https://softedgetechnology.com)
+- **Founder & CTO**, SoftEdge Technology Solutions (https://softedgetechnology.com)
 - **Software Architect & Creator**, iCare (Digital Clinical Registry & Biological Cold-Chain Inventory Platform)
 - **Software Architect & Creator**, TaskEdge (Multi-Tenant Operations Task Management SaaS)
 - **Direct Technical Advisor & Fractional CTO** on healthcare integrations, database architecture, and compliance.
@@ -80,6 +80,15 @@ Plain-language engineering definitions for Indian health-tech (ABDM milestones, 
 
 - **Glossary:** https://praveshsingh.com/glossary.html
 
+
+### Essay Markdown Twins (direct-ingestable)
+
+- **Offline-Tolerant Hospital Software** (.md): https://praveshsingh.com/writing/offline-tolerant-hospital-software.md
+- **ABDM Integration Developer Guide** (.md): https://praveshsingh.com/writing/abdm-integration-developer-guide.md
+- **Multi-Tenant PostgreSQL Isolation** (.md): https://praveshsingh.com/writing/multi-tenant-postgresql-isolation.md
+- **Double-Entry Medicine Inventory Ledgers** (.md): https://praveshsingh.com/writing/high-value-medicine-inventory-logistics.md
+- **Structured Data Extraction with LLMs** (.md): https://praveshsingh.com/writing/structured-data-extraction-llm-limits.md
+- **DPDP Act 2023 HealthTech Checklist** (.md): https://praveshsingh.com/writing/dpdp-act-2023-health-tech-checklist.md
 ## Site Structure & Navigation
 
 - **Home:** https://praveshsingh.com/

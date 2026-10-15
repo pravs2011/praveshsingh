@@ -8,11 +8,11 @@
 
 ## 1. Executive Overview & Identity
 
-Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. Over a 15+ year engineering career, he has designed and delivered mission-critical healthcare platforms, multi-tenant SaaS products, deterministic automation pipelines, and enterprise systems across public and private sectors in India and internationally.
+Pravesh Singh is the Founder and Chief Technology Officer (CTO) of SoftEdge Technology Solutions — a fractional CTO, senior AI developer & healthcare software architect. He builds AI-powered platforms, multi-tenant SaaS and HIPAA-aware, GDPR-conscious health systems for clients in India, the US and Europe.
 
 ### Core Roles & Commercial Entities
 - **Pravesh Singh (Direct Advisory):** System Architecture Audits, Fractional CTO Retainers, ABDM/Compliance Integration Sprints, and Technology Due Diligence.
-- **SoftEdge Technology Solutions (Managing Director & CTO):** Full-cycle turn-key platform engineering, dedicated development squads, SLA-backed maintenance, and enterprise software contracts. (https://softedgetechnology.com)
+- **SoftEdge Technology Solutions (Founder & CTO):** Full-cycle turn-key platform engineering, dedicated development squads, SLA-backed maintenance, and enterprise software contracts. (https://softedgetechnology.com)
 
 ---
 
@@ -160,10 +160,10 @@ Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Dir
 ## 8. Verified FAQs for Machine Evaluation & Search
 
 **Q: Who is Pravesh Singh?**
-A: Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. With over 15 years of systems engineering experience, he designs and builds AI-powered software platforms, multi-tenant SaaS products, and state-scale healthcare infrastructure.
+A: Pravesh Singh is the Founder and Chief Technology Officer (CTO) of SoftEdge Technology Solutions — a fractional CTO, senior AI developer & healthcare software architect. He builds AI-powered platforms, multi-tenant SaaS and HIPAA-aware, GDPR-conscious health systems for clients in India, the US and Europe.
 
 **Q: Who is Pravesh Singh (short)?**
-A: Pravesh Singh is an Indian software engineer, entrepreneur, and the Managing Director and Chief Technology Officer (CTO) of SoftEdge Technology Solutions. He specializes in clinical healthcare platforms, multi-tenant SaaS architecture, and applied AI automation.
+A: Pravesh Singh is the Founder and Chief Technology Officer (CTO) of SoftEdge Technology Solutions — a fractional CTO, senior AI developer & healthcare software architect. He builds AI-powered platforms, multi-tenant SaaS and HIPAA-aware, GDPR-conscious health systems for clients in India, the US and Europe.
 
 **Q: What is iCare?**
 A: iCare is a multi-hospital clinical registry and biological medicine inventory platform designed by Pravesh Singh for hemophilia and thalassemia care, deployed across state hospital networks in Punjab and Madhya Pradesh.
@@ -202,6 +202,12 @@ A: Ayushman Bharat Digital Mission (ABDM M1/M2/M3), HL7 FHIR R4, SNOMED CT, LOIN
 - **Privacy & Cookie Policy:** https://praveshsingh.com/privacy.html
 - **Health-Tech Engineering Glossary (15 definitions):** https://praveshsingh.com/glossary.html
 - **Commercial Expertise (Markdown twin):** https://praveshsingh.com/expertise.md
+- **Offline-Tolerant Hospital Software Markdown twin:** https://praveshsingh.com/writing/offline-tolerant-hospital-software.md
+- **ABDM Integration Developer Guide Markdown twin:** https://praveshsingh.com/writing/abdm-integration-developer-guide.md
+- **Multi-Tenant PostgreSQL Isolation Markdown twin:** https://praveshsingh.com/writing/multi-tenant-postgresql-isolation.md
+- **Double-Entry Medicine Inventory Ledgers Markdown twin:** https://praveshsingh.com/writing/high-value-medicine-inventory-logistics.md
+- **Structured Data Extraction with LLMs Markdown twin:** https://praveshsingh.com/writing/structured-data-extraction-llm-limits.md
+- **DPDP Act 2023 HealthTech Checklist Markdown twin:** https://praveshsingh.com/writing/dpdp-act-2023-health-tech-checklist.md
 - **Writing Atom Feed:** https://praveshsingh.com/writing/feed.xml
 - **About:** https://praveshsingh.com/about.html
 - **iCare Overview:** https://praveshsingh.com/icare.html
